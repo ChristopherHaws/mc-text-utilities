@@ -1,9 +1,9 @@
-# Fabric Example Mod
+# Text Utilities Fabric Minecraft Mod
 
 ## Setup
+Add the mod to your Minecraft mods folder
 
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
-
-## License
-
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+## References
+- [Fabric Wiki](https://fabricmc.net/wiki/)
+- [Minecraft Mappings](https://linkie.shedaniel.me/mappings)
+- [Cloth Config Docs](https://shedaniel.gitbook.io/cloth-config)

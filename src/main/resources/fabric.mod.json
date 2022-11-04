@@ -1,34 +1,44 @@
 {
-  "schemaVersion": 1,
-  "id": "textutilities",
-  "version": "${version}",
-  "name": "Text Utilities Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
-  "authors": [
-    "chaws"
-  ],
-  "contact": {
-    "homepage": "https://chaws.dev/",
-    "sources": "https://github.com/ChristopherHaws/mc-text-utilities"
-  },
-  "license": "CC0-1.0",
-  "icon": "assets/textutilities/icon.png",
-  "environment": "*",
-  "entrypoints": {
-    "client": [
-      "dev.chaws.textutilities.TextUtilitiesMod"
-    ]
-  },
-  "mixins": [
-    "textutilities.mixins.json"
-  ],
-  "depends": {
-    "fabricloader": ">=0.14.6",
-    "fabric": "*",
-    "minecraft": "~1.19",
-    "java": ">=17"
-  },
-  "suggests": {
-    "another-mod": "*"
-  }
+	"schemaVersion": 1,
+	"id": "textutilities",
+	"version": "${version}",
+	"name": "Text Utilities Mod",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"chaws"
+	],
+	"contact": {
+		"homepage": "https://chaws.dev/",
+		"sources": "https://github.com/ChristopherHaws/mc-text-utilities"
+	},
+	"license": "GNU GPLv3",
+	"icon": "assets/textutilities/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"client": [
+			"dev.chaws.textutilities.TextUtilitiesMod"
+		],
+		"modmenu": [
+			"dev.chaws.textutilities.config.ModMenuIntegration"
+		]
+	},
+	"mixins": [
+		"textutilities.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.10",
+		"fabric": "*",
+		"minecraft": "~1.19",
+		"java": ">=17"
+	},
+	"suggests": {
+		"another-mod": "*"
+	},
+	"custom": {
+		"modmenu": {
+			"links": {
+				"modmenu.discord": "https://discord.gg/jEGF5fb"
+			}
+		}
+	}
 }
