@@ -19,7 +19,7 @@ public class SignEditScreenMixin {
 	private void init(CallbackInfo ci) {
 		TextUtilitiesConfig config = AutoConfig.getConfigHolder(TextUtilitiesConfig.class).getConfig();
 
-		if (config.formattingCodePrefix == FormattingCodePrefix.SECTION) {
+		if (config.formattingCodePrefix == FormattingCodePrefix.VANILLA) {
 			return;
 		}
 
@@ -27,7 +27,7 @@ public class SignEditScreenMixin {
 			var currentLine = text[i];
 			text[i] = currentLine.replace(
 				config.formattingCodePrefix.getPrefix(),
-				FormattingCodePrefix.SECTION.getPrefix()
+				FormattingCodePrefix.VANILLA.getPrefix()
 			);
 		}
 	}
@@ -36,7 +36,7 @@ public class SignEditScreenMixin {
 	private void removed(CallbackInfo ci) {
 		TextUtilitiesConfig config = AutoConfig.getConfigHolder(TextUtilitiesConfig.class).getConfig();
 
-		if (config.formattingCodePrefix == FormattingCodePrefix.SECTION) {
+		if (config.formattingCodePrefix == FormattingCodePrefix.VANILLA) {
 			return;
 		}
 
@@ -44,7 +44,7 @@ public class SignEditScreenMixin {
 			var currentLine = text[i];
 
 			text[i] = currentLine.replace(
-				FormattingCodePrefix.SECTION.getPrefix(),
+				FormattingCodePrefix.VANILLA.getPrefix(),
 				config.formattingCodePrefix.getPrefix()
 			);
 		}

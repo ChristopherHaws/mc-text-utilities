@@ -4,8 +4,9 @@ import me.shedaniel.clothconfig2.gui.entries.SelectionListEntry;
 import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.NotNull;
 
+@SuppressWarnings("unused")
 public enum FormattingCodePrefix implements SelectionListEntry.Translatable {
-	SECTION("Vanilla (section sign)", Formatting.FORMATTING_CODE_PREFIX),
+	VANILLA("Vanilla", Formatting.FORMATTING_CODE_PREFIX),
 	AMPERSAND("Ampersand", '&');
 
 	private final String name;

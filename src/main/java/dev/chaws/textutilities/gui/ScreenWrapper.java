@@ -13,7 +13,7 @@ public class ScreenWrapper {
 	public void commit(char a) {
 		//TODO: This should be a section prefix and we should replace them
 		// with ampersand on clicking done if the server is not fabric
-		this.sc.charTyped(FormattingCodePrefix.SECTION.getPrefix(), 0);
+		this.sc.charTyped(FormattingCodePrefix.VANILLA.getPrefix(), 0);
 		this.sc.charTyped(a, 0);
 	}
 }

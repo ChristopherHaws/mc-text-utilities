@@ -2,16 +2,17 @@
 	"schemaVersion": 1,
 	"id": "textutilities",
 	"version": "${version}",
-	"name": "Text Utilities Mod",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "Text Utilities",
+	"description": "Adds buttons to format and color the text in signs, books, and anvils.",
 	"authors": [
 		"chaws"
 	],
 	"contact": {
-		"homepage": "https://chaws.dev/",
-		"sources": "https://github.com/ChristopherHaws/mc-text-utilities"
+		"homepage": "https://modrinth.com/mod/text-utilities",
+		"sources": "https://github.com/ChristopherHaws/mc-text-utilities",
+		"issues": "https://github.com/ChristopherHaws/mc-text-utilities/issues"
 	},
-	"license": "GNU GPLv3",
+	"license": "LGPL-3",
 	"icon": "assets/textutilities/icon.png",
 	"environment": "*",
 	"entrypoints": {
@@ -26,18 +27,18 @@
 		"textutilities.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.14.10",
+		"fabricloader": ">=0.14",
 		"fabric": "*",
 		"minecraft": "~1.19",
 		"java": ">=17"
 	},
 	"suggests": {
-		"another-mod": "*"
+		"modmenu": ">=4"
 	},
 	"custom": {
 		"modmenu": {
 			"links": {
-				"modmenu.discord": "https://discord.gg/jEGF5fb"
+				"modmenu.discord": "https://discord.gg/kQjty3rfJd"
 			}
 		}
 	}

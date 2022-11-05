@@ -14,7 +14,6 @@ public class TextUtilitiesConfig implements ConfigData {
 	public boolean enabled = true;
 
 	@ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
-	@Comment("The formatting code type to use.")
-	public FormattingCodePrefix formattingCodePrefix = FormattingCodePrefix.SECTION;
-
+	@Comment("The formatting code type to use. Vanilla = §, Ampersand = &")
+	public FormattingCodePrefix formattingCodePrefix = FormattingCodePrefix.VANILLA;
 }
