@@ -1,9 +1,8 @@
 package dev.chaws.textutilities.mixin;
 
-import dev.chaws.textutilities.common.FormattingCodePrefix;
-import dev.chaws.textutilities.config.TextUtilitiesConfig;
-import me.shedaniel.autoconfig.AutoConfig;
+import dev.chaws.textutilities.TextUtilitiesMod;
 import net.minecraft.client.gui.screen.ingame.SignEditScreen;
+import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -17,26 +16,24 @@ public class SignEditScreenMixin {
 
 	@Inject(at = {@At("TAIL")}, method = {"init"})
 	private void init(CallbackInfo ci) {
-		TextUtilitiesConfig config = AutoConfig.getConfigHolder(TextUtilitiesConfig.class).getConfig();
-
-		if (config.formattingCodePrefix == FormattingCodePrefix.VANILLA) {
+		var config = TextUtilitiesMod.getConfig();
+		if (config.getFormattingCodePrefix() == Formatting.FORMATTING_CODE_PREFIX) {
 			return;
 		}
 
 		for (var i = 0; i < text.length; i++) {
 			var currentLine = text[i];
 			text[i] = currentLine.replace(
-				config.formattingCodePrefix.getPrefix(),
-				FormattingCodePrefix.VANILLA.getPrefix()
+				config.getFormattingCodePrefix(),
+				Formatting.FORMATTING_CODE_PREFIX
 			);
 		}
 	}
 
 	@Inject(at = {@At("HEAD")}, method = {"removed"})
 	private void removed(CallbackInfo ci) {
-		TextUtilitiesConfig config = AutoConfig.getConfigHolder(TextUtilitiesConfig.class).getConfig();
-
-		if (config.formattingCodePrefix == FormattingCodePrefix.VANILLA) {
+		var config = TextUtilitiesMod.getConfig();
+		if (config.getFormattingCodePrefix() == Formatting.FORMATTING_CODE_PREFIX) {
 			return;
 		}
 
@@ -44,8 +41,8 @@ public class SignEditScreenMixin {
 			var currentLine = text[i];
 
 			text[i] = currentLine.replace(
-				FormattingCodePrefix.VANILLA.getPrefix(),
-				config.formattingCodePrefix.getPrefix()
+				Formatting.FORMATTING_CODE_PREFIX,
+				config.getFormattingCodePrefix()
 			);
 		}
 	}

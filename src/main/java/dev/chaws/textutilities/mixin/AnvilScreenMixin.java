@@ -1,5 +1,6 @@
 package dev.chaws.textutilities.mixin;
 
+import dev.chaws.textutilities.TextUtilitiesMod;
 import net.minecraft.client.gui.screen.ingame.AnvilScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,7 +14,11 @@ public class AnvilScreenMixin {
 	@Shadow private TextFieldWidget nameField;
 
 	@Inject(at = {@At("HEAD")}, method = {"keyPressed"})
-	private void inject(int i1, int i2, int i3, CallbackInfoReturnable<Boolean> ci) {
+	private void inject(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> ci) {
+		if (!TextUtilitiesMod.getConfig().enabled) {
+			return;
+		}
+
 		((AnvilScreen)(Object)this).setFocused(this.nameField);
 	}
 }
