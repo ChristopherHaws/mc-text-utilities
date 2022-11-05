@@ -1,21 +1,28 @@
 package dev.chaws.textutilities.handlers;
 
+import com.google.common.collect.ImmutableList;
 import dev.chaws.textutilities.mixin.AnvilScreenAccessor;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.client.screen.v1.Screens;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.AnvilScreen;
 import net.minecraft.client.gui.screen.ingame.BookEditScreen;
 import net.minecraft.client.gui.screen.ingame.SignEditScreen;
+import net.minecraft.client.gui.tooltip.OrderedTextTooltipComponent;
 import net.minecraft.client.gui.widget.ButtonWidget;
+import net.minecraft.text.OrderedText;
+import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Environment(EnvType.CLIENT)
 public class FormatButtonsHandler {
-	private final static List<Formatting> colorFormattings = List.of(
+	private final static ImmutableList<Formatting> colorFormattings = ImmutableList.of(
 		Formatting.BLACK,
 		Formatting.DARK_GRAY,
 		Formatting.DARK_BLUE,
@@ -34,7 +41,7 @@ public class FormatButtonsHandler {
 		Formatting.WHITE
 	);
 
-	private final static List<Formatting> modifierFormattings = List.of(
+	private final static ImmutableList<Formatting> modifierFormattings = ImmutableList.of(
 		Formatting.BOLD,
 		Formatting.ITALIC,
 		Formatting.UNDERLINE,
@@ -66,8 +73,6 @@ public class FormatButtonsHandler {
 			// Not a supported screen.
 			return;
 		}
-
-		// TODO: Try to use ButtonListWidget
 
 		var colorButtons = getFormatButtons(
 			screen,
@@ -135,9 +140,8 @@ public class FormatButtonsHandler {
 					screen.charTyped(Formatting.FORMATTING_CODE_PREFIX, 0);
 					screen.charTyped(formatting.getCode(), 0);
 				},
-				(button, matrices, mouseX, mouseY) -> {
-					
-				}
+				(button, matrices, mouseX, mouseY) ->
+					new OrderedTextTooltipComponent(OrderedText.styledForwardsVisitedString("Tooltip!", Style.EMPTY))
 			);
 		}
 
