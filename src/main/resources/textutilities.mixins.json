@@ -10,7 +10,8 @@
 		"AnvilScreenAccessor",
 		"AnvilScreenMixin",
 		"FormattingMixin",
-		"SignEditScreenMixin"
+		"SignEditScreenMixin",
+		"TextFieldWidgetMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

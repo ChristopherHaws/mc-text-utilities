@@ -1,8 +1,7 @@
 package dev.chaws.textutilities.mixin;
 
-import dev.chaws.textutilities.TextUtilitiesMod;
+import dev.chaws.textutilities.utils.FormattingUtils;
 import net.minecraft.client.gui.screen.ingame.SignEditScreen;
-import net.minecraft.util.Formatting;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -14,36 +13,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class SignEditScreenMixin {
 	@Final @Shadow private String[] text;
 
-	@Inject(at = {@At("TAIL")}, method = {"init"})
+	@Inject(method = "init", at = @At("TAIL"))
 	private void init(CallbackInfo ci) {
-		var config = TextUtilitiesMod.getConfig();
-		if (config.getFormattingCodePrefix() == Formatting.FORMATTING_CODE_PREFIX) {
-			return;
-		}
-
-		for (var i = 0; i < text.length; i++) {
-			var currentLine = text[i];
-			text[i] = currentLine.replace(
-				config.getFormattingCodePrefix(),
-				Formatting.FORMATTING_CODE_PREFIX
-			);
-		}
+		FormattingUtils.replaceConfiguredPrefixWithBuiltInPrefix(text);
 	}
 
-	@Inject(at = {@At("HEAD")}, method = {"removed"})
+	@Inject(method = "removed", at = @At("HEAD"))
 	private void removed(CallbackInfo ci) {
-		var config = TextUtilitiesMod.getConfig();
-		if (config.getFormattingCodePrefix() == Formatting.FORMATTING_CODE_PREFIX) {
-			return;
-		}
-
-		for (var i = 0; i < text.length; i++) {
-			var currentLine = text[i];
-
-			text[i] = currentLine.replace(
-				Formatting.FORMATTING_CODE_PREFIX,
-				config.getFormattingCodePrefix()
-			);
-		}
+		FormattingUtils.replaceBuiltInPrefixWithConfiguredPrefix(text);
 	}
 }

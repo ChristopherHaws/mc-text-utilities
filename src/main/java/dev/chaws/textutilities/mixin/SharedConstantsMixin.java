@@ -10,9 +10,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(SharedConstants.class)
 public class SharedConstantsMixin {
-	@Inject(at = {@At("HEAD")}, method = {"isValidChar"}, cancellable = true)
+	@Inject(method = "isValidChar", at = @At("HEAD"), cancellable = true)
 	private static void isValidChar(char p, CallbackInfoReturnable<Boolean> ci) {
-		if (!TextUtilitiesMod.getConfig().enabled) {
+		if (!TextUtilitiesMod.enabled) {
 			return;
 		}
 
