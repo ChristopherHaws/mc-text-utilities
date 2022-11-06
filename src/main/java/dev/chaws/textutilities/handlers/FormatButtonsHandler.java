@@ -10,10 +10,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.AnvilScreen;
 import net.minecraft.client.gui.screen.ingame.BookEditScreen;
 import net.minecraft.client.gui.screen.ingame.SignEditScreen;
-import net.minecraft.client.gui.tooltip.OrderedTextTooltipComponent;
 import net.minecraft.client.gui.widget.ButtonWidget;
-import net.minecraft.text.OrderedText;
-import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
@@ -140,8 +137,10 @@ public class FormatButtonsHandler {
 					screen.charTyped(Formatting.FORMATTING_CODE_PREFIX, 0);
 					screen.charTyped(formatting.getCode(), 0);
 				},
-				(button, matrices, mouseX, mouseY) ->
-					new OrderedTextTooltipComponent(OrderedText.styledForwardsVisitedString("Tooltip!", Style.EMPTY))
+				(button, matrices, mouseX, mouseY) -> {
+					var text = Text.literal(formatting.toString().concat(formatting.getName()));
+					screen.renderTooltip(matrices, text, mouseX, mouseY);
+				}
 			);
 		}
 
