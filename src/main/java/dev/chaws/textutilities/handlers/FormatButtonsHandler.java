@@ -136,10 +136,6 @@ public class FormatButtonsHandler {
 				cod -> {
 					screen.charTyped(Formatting.FORMATTING_CODE_PREFIX, 0);
 					screen.charTyped(formatting.getCode(), 0);
-				},
-				(button, matrices, mouseX, mouseY) -> {
-					var text = Text.literal(formatting.toString().concat(formatting.getName()));
-					screen.renderTooltip(matrices, text, mouseX, mouseY);
 				}
 			);
 		}
@@ -153,6 +149,10 @@ public class FormatButtonsHandler {
 			cod -> {
 				screen.charTyped(Formatting.FORMATTING_CODE_PREFIX, 0);
 				screen.charTyped(formatting.getCode(), 0);
+			},
+			(button, matrices, mouseX, mouseY) -> {
+				var text = Text.literal(formatting.toString().concat(formatting.getName()));
+				screen.renderTooltip(matrices, text, mouseX, mouseY);
 			}
 		);
 	}
