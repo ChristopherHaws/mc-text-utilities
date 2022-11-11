@@ -25,6 +25,8 @@ NOTE: At the moment, you have to press a color before a format button if you wan
 ---
 
 ## Installation
+[<img src="https://i.imgur.com/Ol1Tcf8.png" height="50"/>](https://modrinth.com/mod/fabric-api)
+[<img src="https://i.imgur.com/7weZ8uu.png" height="50"/>](https://modrinth.com/mod/cloth-config)
 
 ### Manual installation
 
