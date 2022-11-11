@@ -9,10 +9,16 @@ on:
     branches:
       - main
       - '1.19'
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.pdn'
   push:
     branches:
       - main
       - '1.19'
+    paths-ignore:
+      - '**/*.md'
+      - '**/*.pdn'
 
 jobs:
   build:
