@@ -1,7 +1,7 @@
 {
 	"required": true,
 	"minVersion": "0.8",
-	"package": "dev.chaws.textutilities.mixin",
+	"package": "io.chaws.textutilities.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
 		"SharedConstantsMixin"

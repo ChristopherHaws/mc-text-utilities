@@ -17,10 +17,10 @@
 	"environment": "*",
 	"entrypoints": {
 		"client": [
-			"dev.chaws.textutilities.TextUtilitiesMod"
+			"io.chaws.textutilities.TextUtilitiesMod"
 		],
 		"modmenu": [
-			"dev.chaws.textutilities.config.ModMenuIntegration"
+			"io.chaws.textutilities.config.ModMenuIntegration"
 		]
 	},
 	"mixins": [

@@ -1,6 +1,6 @@
-package dev.chaws.textutilities.mixin;
+package io.chaws.textutilities.mixin;
 
-import dev.chaws.textutilities.utils.FormattingUtils;
+import io.chaws.textutilities.utils.FormattingUtils;
 import net.minecraft.client.gui.screen.ingame.SignEditScreen;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;

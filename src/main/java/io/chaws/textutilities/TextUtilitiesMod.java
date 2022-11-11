@@ -1,7 +1,7 @@
-package dev.chaws.textutilities;
+package io.chaws.textutilities;
 
-import dev.chaws.textutilities.config.TextUtilitiesConfig;
-import dev.chaws.textutilities.handlers.FormatButtonsHandler;
+import io.chaws.textutilities.config.TextUtilitiesConfig;
+import io.chaws.textutilities.handlers.FormatButtonsHandler;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ClientModInitializer;

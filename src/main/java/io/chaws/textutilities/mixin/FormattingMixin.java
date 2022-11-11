@@ -1,6 +1,6 @@
-package dev.chaws.textutilities.mixin;
+package io.chaws.textutilities.mixin;
 
-import dev.chaws.textutilities.TextUtilitiesMod;
+import io.chaws.textutilities.TextUtilitiesMod;
 import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;

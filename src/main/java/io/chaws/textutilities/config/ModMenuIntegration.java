@@ -1,4 +1,4 @@
-package dev.chaws.textutilities.config;
+package io.chaws.textutilities.config;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;

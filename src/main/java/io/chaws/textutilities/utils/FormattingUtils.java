@@ -1,6 +1,6 @@
-package dev.chaws.textutilities.utils;
+package io.chaws.textutilities.utils;
 
-import dev.chaws.textutilities.TextUtilitiesMod;
+import io.chaws.textutilities.TextUtilitiesMod;
 import net.minecraft.util.Formatting;
 
 public class FormattingUtils {

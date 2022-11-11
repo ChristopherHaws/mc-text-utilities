@@ -1,4 +1,4 @@
-package dev.chaws.textutilities.mixin;
+package io.chaws.textutilities.mixin;
 
 import net.minecraft.client.gui.screen.ingame.AnvilScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;

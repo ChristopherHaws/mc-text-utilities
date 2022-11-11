@@ -1,7 +1,7 @@
-package dev.chaws.textutilities.mixin;
+package io.chaws.textutilities.mixin;
 
-import dev.chaws.textutilities.TextUtilitiesMod;
-import dev.chaws.textutilities.utils.FormattingUtils;
+import io.chaws.textutilities.TextUtilitiesMod;
+import io.chaws.textutilities.utils.FormattingUtils;
 import net.minecraft.client.gui.screen.ingame.AnvilScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.item.ItemStack;

@@ -1,4 +1,4 @@
-package dev.chaws.textutilities.config;
+package io.chaws.textutilities.config;
 
 import blue.endless.jankson.Comment;
 import me.shedaniel.autoconfig.ConfigData;
