@@ -2,6 +2,8 @@ package io.chaws.textutilities.mixin;
 
 import io.chaws.textutilities.TextUtilitiesMod;
 import io.chaws.textutilities.utils.FormattingUtils;
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.ingame.AnvilScreen;
 import net.minecraft.client.gui.widget.TextFieldWidget;
 import net.minecraft.item.ItemStack;
@@ -18,6 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Optional;
 
+@Environment(EnvType.CLIENT)
 @Mixin(AnvilScreen.class)
 public class AnvilScreenMixin {
 	@Shadow private TextFieldWidget nameField;
@@ -37,6 +40,10 @@ public class AnvilScreenMixin {
 
 	@Inject(method = "onSlotUpdate", at = @At(value = "TAIL"))
 	private void onSlotUpdate(ScreenHandler handler, int slotId, ItemStack stack, CallbackInfo ci) {
+		if (!TextUtilitiesMod.enabled) {
+			return;
+		}
+
 		if (slotId != 0) {
 			return;
 		}
@@ -112,11 +119,19 @@ public class AnvilScreenMixin {
 
 	@ModifyVariable(method = "onRenamed", at = @At("HEAD"), argsOnly = true)
 	private String onRenamed(String name) {
+		if (!TextUtilitiesMod.enabled) {
+			return name;
+		}
+
 		return FormattingUtils.replaceBuiltInPrefixWithConfiguredPrefix(name);
 	}
 
 	@ModifyArg(method = "onSlotUpdate", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/widget/TextFieldWidget;setText(Ljava/lang/String;)V"))
 	private String onSlotUpdate_TextFieldWidget_setText(String name) {
+		if (!TextUtilitiesMod.enabled) {
+			return name;
+		}
+
 		return FormattingUtils.replaceConfiguredPrefixWithBuiltInPrefix(name);
 	}
 }
