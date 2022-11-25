@@ -11,10 +11,6 @@ import java.util.Stack;
 
 public class FormattingUtils {
 	public static String replaceConfiguredPrefixWithBuiltInPrefix(String value) {
-		if (!TextUtilities.enabled) {
-			return value;
-		}
-
 		var config = TextUtilities.getConfig();
 		var formattingCodePrefix = config.getFormattingCodePrefix();
 		if (formattingCodePrefix == Formatting.FORMATTING_CODE_PREFIX) {
@@ -28,10 +24,6 @@ public class FormattingUtils {
 	}
 
 	public static void replaceConfiguredPrefixWithBuiltInPrefix(String[] values) {
-		if (!TextUtilities.enabled) {
-			return;
-		}
-
 		var config = TextUtilities.getConfig();
 		var formattingCodePrefix = config.getFormattingCodePrefix();
 		if (formattingCodePrefix == Formatting.FORMATTING_CODE_PREFIX) {
@@ -47,10 +39,6 @@ public class FormattingUtils {
 	}
 
 	public static String replaceBuiltInPrefixWithConfiguredPrefix(String value) {
-		if (!TextUtilities.enabled) {
-			return value;
-		}
-
 		var config = TextUtilities.getConfig();
 		var formattingCodePrefix = config.getFormattingCodePrefix();
 		if (formattingCodePrefix == Formatting.FORMATTING_CODE_PREFIX) {
@@ -64,10 +52,6 @@ public class FormattingUtils {
 	}
 
 	public static void replaceBuiltInPrefixWithConfiguredPrefix(String[] values) {
-		if (!TextUtilities.enabled) {
-			return;
-		}
-
 		var config = TextUtilities.getConfig();
 		var formattingCodePrefix = config.getFormattingCodePrefix();
 		if (formattingCodePrefix == Formatting.FORMATTING_CODE_PREFIX) {

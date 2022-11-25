@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class SharedConstantsMixin {
 	@Inject(method = "isValidChar", at = @At("HEAD"), cancellable = true)
 	private static void isValidChar(char p, CallbackInfoReturnable<Boolean> ci) {
-		if (!TextUtilities.enabled) {
+		if (TextUtilities.getConfig().formattingDisabled()) {
 			return;
 		}
 

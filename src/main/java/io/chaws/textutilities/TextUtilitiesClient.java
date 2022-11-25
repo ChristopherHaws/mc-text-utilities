@@ -9,11 +9,6 @@ import net.fabricmc.api.Environment;
 public class TextUtilitiesClient implements ClientModInitializer {
 	@Override
 	public void onInitializeClient() {
-		if (!TextUtilities.enabled) {
-			TextUtilities.logger.warn("Skipping client initialization because mod is disabled.");
-			return;
-		}
-
 		FormatButtonsHandler.initialize();
 	}
 }

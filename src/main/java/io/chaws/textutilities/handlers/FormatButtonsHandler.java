@@ -1,6 +1,7 @@
 package io.chaws.textutilities.handlers;
 
 import com.google.common.collect.ImmutableList;
+import io.chaws.textutilities.TextUtilities;
 import io.chaws.textutilities.mixin.AnvilScreenAccessor;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -54,16 +55,29 @@ public class FormatButtonsHandler {
 	}
 
 	private static void onScreenOpened(Screen screen) {
+		var config = TextUtilities.getConfig();
 		var xOffsetFromCenter = 0;
 		var yOffset = 0;
 
 		if (screen instanceof SignEditScreen) {
+			if (!config.signFormattingEnabled) {
+				return;
+			}
+
 			xOffsetFromCenter += 50;
 			yOffset += 70;
 		} else if (screen instanceof BookEditScreen) {
+			if (!config.bookFormattingEnabled) {
+				return;
+			}
+
 			xOffsetFromCenter += 70;
 			yOffset += 20;
 		} else if (screen instanceof AnvilScreen anvilScreen) {
+			if (!config.anvilFormattingEnabled) {
+				return;
+			}
+
 			xOffsetFromCenter += 85;
 			yOffset += (screen.height / 2) - 80;
 			((AnvilScreenAccessor)anvilScreen).getNameField().setRenderTextProvider((abc, def) ->

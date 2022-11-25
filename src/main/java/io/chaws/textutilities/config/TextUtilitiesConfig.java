@@ -10,8 +10,16 @@ import org.jetbrains.annotations.ApiStatus;
 @ApiStatus.Internal
 @Config(name = "textutilities")
 public class TextUtilitiesConfig implements ConfigData {
-	@ConfigEntry.Gui.RequiresRestart
-	public boolean enabled = true;
+	@Comment("Show or hide the formatting buttons in the sign edit screen")
+	public boolean signFormattingEnabled = true;
+	@Comment("Show or hide the formatting buttons in the book edit screen")
+	public boolean bookFormattingEnabled = true;
+	@Comment("Show or hide the formatting buttons in the anvil screen")
+	public boolean anvilFormattingEnabled = true;
+
+	public boolean formattingDisabled() {
+		return !this.signFormattingEnabled && !this.bookFormattingEnabled && !this.anvilFormattingEnabled;
+	}
 
 	@ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
 	@Comment("The formatting code type to use. Vanilla = §, Ampersand = &")

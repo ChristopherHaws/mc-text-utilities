@@ -1,5 +1,7 @@
 {
 	"text.autoconfig.textutilities.title": "Text Utilities",
-	"text.autoconfig.textutilities.option.enabled": "Enabled",
+	"text.autoconfig.textutilities.option.signFormattingEnabled": "Sign Formatting Enabled",
+	"text.autoconfig.textutilities.option.bookFormattingEnabled": "Book Formatting Enabled",
+	"text.autoconfig.textutilities.option.anvilFormattingEnabled": "Anvil Formatting Enabled",
 	"text.autoconfig.textutilities.option.formattingCodePrefix": "Formatting Code Prefix"
 }
