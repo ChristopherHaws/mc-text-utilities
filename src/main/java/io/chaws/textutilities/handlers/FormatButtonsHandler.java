@@ -54,18 +54,21 @@ public class FormatButtonsHandler {
 	}
 
 	private static void onScreenOpened(Screen screen) {
-		var offsetFromCenter = 0;
+		var xOffsetFromCenter = 0;
+		var yOffset = 0;
 
 		if (screen instanceof SignEditScreen) {
-			offsetFromCenter = 50;
+			xOffsetFromCenter += 50;
+			yOffset += 70;
 		} else if (screen instanceof BookEditScreen) {
-			offsetFromCenter = 70;
+			xOffsetFromCenter += 70;
+			yOffset += 20;
 		} else if (screen instanceof AnvilScreen anvilScreen) {
+			xOffsetFromCenter += 85;
+			yOffset += (screen.height / 2) - 80;
 			((AnvilScreenAccessor)anvilScreen).getNameField().setRenderTextProvider((abc, def) ->
 				Text.literal(abc).asOrderedText()
 			);
-
-			offsetFromCenter += 85;
 		} else {
 			// Not a supported screen.
 			return;
@@ -74,16 +77,16 @@ public class FormatButtonsHandler {
 		var colorButtons = getFormatButtons(
 			screen,
 			colorFormattings,
-			screen.width / 2 - (120 + offsetFromCenter),
-			70,
+			(screen.width / 2) - (120 + xOffsetFromCenter),
+			yOffset,
 			4
 		);
 
 		var modifierButtons = getFormatButtons(
 			screen,
 			modifierFormattings,
-			screen.width / 2 + offsetFromCenter,
-			50,
+			(screen.width / 2) + (xOffsetFromCenter),
+			yOffset,
 			6
 		);
 
