@@ -1,6 +1,6 @@
 package io.chaws.textutilities.mixin;
 
-import io.chaws.textutilities.TextUtilitiesMod;
+import io.chaws.textutilities.TextUtilities;
 import io.chaws.textutilities.utils.FormattingUtils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -31,7 +31,7 @@ public class AnvilScreenMixin {
 
 	@Inject(method = "keyPressed", at = @At("HEAD"))
 	private void inject(int keyCode, int scanCode, int modifiers, CallbackInfoReturnable<Boolean> ci) {
-		if (!TextUtilitiesMod.enabled) {
+		if (!TextUtilities.enabled) {
 			return;
 		}
 
@@ -40,7 +40,7 @@ public class AnvilScreenMixin {
 
 	@Inject(method = "onSlotUpdate", at = @At(value = "TAIL"))
 	private void onSlotUpdate(ScreenHandler handler, int slotId, ItemStack stack, CallbackInfo ci) {
-		if (!TextUtilitiesMod.enabled) {
+		if (!TextUtilities.enabled) {
 			return;
 		}
 
@@ -119,7 +119,7 @@ public class AnvilScreenMixin {
 
 	@ModifyVariable(method = "onRenamed", at = @At("HEAD"), argsOnly = true)
 	private String onRenamed(String name) {
-		if (!TextUtilitiesMod.enabled) {
+		if (!TextUtilities.enabled) {
 			return name;
 		}
 
@@ -128,7 +128,7 @@ public class AnvilScreenMixin {
 
 	@ModifyArg(method = "onSlotUpdate", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/widget/TextFieldWidget;setText(Ljava/lang/String;)V"))
 	private String onSlotUpdate_TextFieldWidget_setText(String name) {
-		if (!TextUtilitiesMod.enabled) {
+		if (!TextUtilities.enabled) {
 			return name;
 		}
 
