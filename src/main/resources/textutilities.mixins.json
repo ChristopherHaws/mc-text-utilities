@@ -10,6 +10,7 @@
 	"client": [
 		"AnvilScreenAccessor",
 		"AnvilScreenMixin",
+		"ChatHudMixin",
 		"SignEditScreenMixin",
 		"TextFieldWidgetMixin"
 	],
