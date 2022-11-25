@@ -1,6 +1,6 @@
 package io.chaws.textutilities.mixin;
 
-import io.chaws.textutilities.TextUtilitiesMod;
+import io.chaws.textutilities.TextUtilities;
 import io.chaws.textutilities.utils.FormattingUtils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -19,7 +19,7 @@ public class SignEditScreenMixin {
 
 	@Inject(method = "init", at = @At("TAIL"))
 	private void init(CallbackInfo ci) {
-		if (!TextUtilitiesMod.enabled) {
+		if (!TextUtilities.enabled) {
 			return;
 		}
 
@@ -28,7 +28,7 @@ public class SignEditScreenMixin {
 
 	@Inject(method = "removed", at = @At("HEAD"))
 	private void removed(CallbackInfo ci) {
-		if (!TextUtilitiesMod.enabled) {
+		if (!TextUtilities.enabled) {
 			return;
 		}
 

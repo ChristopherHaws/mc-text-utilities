@@ -16,8 +16,11 @@
 	"icon": "assets/textutilities/icon.png",
 	"environment": "*",
 	"entrypoints": {
+		"main": [
+			"io.chaws.textutilities.TextUtilities"
+		],
 		"client": [
-			"io.chaws.textutilities.TextUtilitiesMod"
+			"io.chaws.textutilities.TextUtilitiesClient"
 		],
 		"modmenu": [
 			"io.chaws.textutilities.config.ModMenuIntegration"

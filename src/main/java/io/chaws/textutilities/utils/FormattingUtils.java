@@ -1,6 +1,6 @@
 package io.chaws.textutilities.utils;
 
-import io.chaws.textutilities.TextUtilitiesMod;
+import io.chaws.textutilities.TextUtilities;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Pair;
 import org.jetbrains.annotations.NotNull;
@@ -11,11 +11,11 @@ import java.util.Stack;
 
 public class FormattingUtils {
 	public static String replaceConfiguredPrefixWithBuiltInPrefix(String value) {
-		if (!TextUtilitiesMod.enabled) {
+		if (!TextUtilities.enabled) {
 			return value;
 		}
 
-		var config = TextUtilitiesMod.getConfig();
+		var config = TextUtilities.getConfig();
 		var formattingCodePrefix = config.getFormattingCodePrefix();
 		if (formattingCodePrefix == Formatting.FORMATTING_CODE_PREFIX) {
 			return value;
@@ -28,11 +28,11 @@ public class FormattingUtils {
 	}
 
 	public static void replaceConfiguredPrefixWithBuiltInPrefix(String[] values) {
-		if (!TextUtilitiesMod.enabled) {
+		if (!TextUtilities.enabled) {
 			return;
 		}
 
-		var config = TextUtilitiesMod.getConfig();
+		var config = TextUtilities.getConfig();
 		var formattingCodePrefix = config.getFormattingCodePrefix();
 		if (formattingCodePrefix == Formatting.FORMATTING_CODE_PREFIX) {
 			return;
@@ -47,11 +47,11 @@ public class FormattingUtils {
 	}
 
 	public static String replaceBuiltInPrefixWithConfiguredPrefix(String value) {
-		if (!TextUtilitiesMod.enabled) {
+		if (!TextUtilities.enabled) {
 			return value;
 		}
 
-		var config = TextUtilitiesMod.getConfig();
+		var config = TextUtilities.getConfig();
 		var formattingCodePrefix = config.getFormattingCodePrefix();
 		if (formattingCodePrefix == Formatting.FORMATTING_CODE_PREFIX) {
 			return value;
@@ -64,11 +64,11 @@ public class FormattingUtils {
 	}
 
 	public static void replaceBuiltInPrefixWithConfiguredPrefix(String[] values) {
-		if (!TextUtilitiesMod.enabled) {
+		if (!TextUtilities.enabled) {
 			return;
 		}
 
-		var config = TextUtilitiesMod.getConfig();
+		var config = TextUtilities.getConfig();
 		var formattingCodePrefix = config.getFormattingCodePrefix();
 		if (formattingCodePrefix == Formatting.FORMATTING_CODE_PREFIX) {
 			return;

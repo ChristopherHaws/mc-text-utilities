@@ -1,6 +1,6 @@
 package io.chaws.textutilities.mixin;
 
-import io.chaws.textutilities.TextUtilitiesMod;
+import io.chaws.textutilities.TextUtilities;
 import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Mixin;
@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class FormattingMixin {
 	@Inject(at = {@At("HEAD")}, method = {"strip"}, cancellable = true)
 	private static void strip(@Nullable String string, CallbackInfoReturnable<@Nullable String> ci) {
-		if (!TextUtilitiesMod.enabled) {
+		if (!TextUtilities.enabled) {
 			return;
 		}
 
