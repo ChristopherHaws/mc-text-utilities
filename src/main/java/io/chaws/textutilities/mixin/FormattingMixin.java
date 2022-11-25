@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class FormattingMixin {
 	@Inject(at = {@At("HEAD")}, method = {"strip"}, cancellable = true)
 	private static void strip(@Nullable String string, CallbackInfoReturnable<@Nullable String> ci) {
-		if (!TextUtilities.enabled) {
+		if (TextUtilities.getConfig().formattingDisabled()) {
 			return;
 		}
 

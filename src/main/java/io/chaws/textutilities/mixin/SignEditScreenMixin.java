@@ -19,7 +19,7 @@ public class SignEditScreenMixin {
 
 	@Inject(method = "init", at = @At("TAIL"))
 	private void init(CallbackInfo ci) {
-		if (!TextUtilities.enabled) {
+		if (!TextUtilities.getConfig().signFormattingEnabled) {
 			return;
 		}
 
@@ -28,7 +28,7 @@ public class SignEditScreenMixin {
 
 	@Inject(method = "removed", at = @At("HEAD"))
 	private void removed(CallbackInfo ci) {
-		if (!TextUtilities.enabled) {
+		if (!TextUtilities.getConfig().signFormattingEnabled) {
 			return;
 		}
 
