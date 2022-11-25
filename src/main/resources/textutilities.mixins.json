@@ -4,13 +4,14 @@
 	"package": "io.chaws.textutilities.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"SharedConstantsMixin",
-		"FormattingMixin"
+		"FormattingMixin",
+		"SharedConstantsMixin"
 	],
 	"client": [
 		"AnvilScreenAccessor",
 		"AnvilScreenMixin",
-		"SignEditScreenMixin"
+		"SignEditScreenMixin",
+		"TextFieldWidgetMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

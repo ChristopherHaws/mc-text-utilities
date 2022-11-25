@@ -2,6 +2,7 @@ plugins {
     // https://fabricmc.net/wiki/documentation:fabric_loom
 	id 'fabric-loom' version '1.0-SNAPSHOT'
 	id 'maven-publish'
+    id 'idea'
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -14,6 +15,7 @@ group = project.maven_group
 repositories {
     maven { url "https://maven.shedaniel.me/" }
     maven { url "https://maven.terraformersmc.com/releases/" }
+    mavenCentral()
 }
 
 dependencies {
@@ -25,6 +27,9 @@ dependencies {
     modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
         exclude(group: "net.fabricmc.fabric-api")
     }
+
+    testImplementation(platform('org.junit:junit-bom:5.9.1'))
+    testImplementation('org.junit.jupiter:junit-jupiter')
 }
 
 processResources {
@@ -51,6 +56,13 @@ jar {
 	from("LICENSE") {
 		rename { "${it}_${project.archivesBaseName}"}
 	}
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
 }
 
 // configure the maven publication
