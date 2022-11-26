@@ -5,10 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.0] - 2022-11-10
-
+## [1.1.0] - 2022-11-25
 ### Added
+- Added options to disable each screen type individually ([#21](https://github.com/ChristopherHaws/mc-text-utilities/pull/21))
+- Increase max width and height of chat hud ([#22](https://github.com/ChristopherHaws/mc-text-utilities/pull/22))
 
+### Fixed
+- Fixed formatting issue with anvil screen ([#14](https://github.com/ChristopherHaws/mc-text-utilities/pull/14))
+- Fixed issue with mod not working on fabric servers ([#15](https://github.com/ChristopherHaws/mc-text-utilities/pull/15))
+- Fixed button offsets per screen type ([#17](https://github.com/ChristopherHaws/mc-text-utilities/pull/17))
+
+## [1.0.0] - 2022-11-10
+### Added
 - Added color and formatting buttons to the sign editor screen, anvil screen, and the book edit screen
 - Added color and formatting support to fabric server's when installed on a server
 - Added formatting code prefix configuration to support servers that don't use the the default `§` (for example, Purpur has built in support for `&`)
