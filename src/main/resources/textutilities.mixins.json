@@ -4,8 +4,8 @@
 	"package": "io.chaws.textutilities.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"FormattingMixin",
-		"SharedConstantsMixin"
+		"io.chaws.textutilities.client.mixin.FormattingMixin",
+		"io.chaws.textutilities.client.mixin.SharedConstantsMixin"
 	],
 	"client": [
 		"AnvilScreenAccessor",

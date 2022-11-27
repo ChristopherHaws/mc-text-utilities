@@ -1,4 +1,4 @@
-package io.chaws.textutilities.mixin;
+package io.chaws.textutilities.mixin.client;
 
 import io.chaws.textutilities.TextUtilities;
 import io.chaws.textutilities.utils.FormattingUtils;

@@ -32,6 +32,24 @@ dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter')
 }
 
+loom {
+    splitEnvironmentSourceSets()
+
+    mods {
+        textutilities {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+        }
+    }
+}
+
+sourceSets {
+    test {
+        compileClasspath += sourceSets.client.compileClasspath
+        runtimeClasspath += sourceSets.client.runtimeClasspath
+    }
+}
+
 processResources {
 	inputs.property "version", project.version
 
@@ -80,4 +98,20 @@ publishing {
 		// The repositories here will be used for publishing your artifact, not for
 		// retrieving dependencies.
 	}
+}
+
+task printSourceSetInformation(){
+
+    doLast{
+        sourceSets.each { srcSet ->
+            println "[" + srcSet.name + "]"
+            println "-->Source directories: " + srcSet.allJava.srcDirs
+            println "-->Output directories: " + srcSet.output.classesDirs.files
+            println "-->Compile classpath:"
+            srcSet.compileClasspath.files.each {
+                println "  " + it.path
+            }
+            println ""
+        }
+    }
 }

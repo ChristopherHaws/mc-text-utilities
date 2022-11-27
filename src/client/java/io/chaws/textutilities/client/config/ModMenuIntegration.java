@@ -1,7 +1,8 @@
-package io.chaws.textutilities.config;
+package io.chaws.textutilities.config.client;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
+import io.chaws.textutilities.config.TextUtilitiesConfig;
 import me.shedaniel.autoconfig.AutoConfig;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
