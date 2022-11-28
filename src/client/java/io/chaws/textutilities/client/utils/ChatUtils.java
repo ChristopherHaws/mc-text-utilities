@@ -1,4 +1,4 @@
-package io.chaws.textutilities.utils.client;
+package io.chaws.textutilities.client.utils;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;

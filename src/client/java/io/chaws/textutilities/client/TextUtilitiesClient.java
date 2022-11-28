@@ -1,6 +1,6 @@
 package io.chaws.textutilities.client;
 
-import io.chaws.textutilities.handlers.client.FormatButtonsHandler;
+import io.chaws.textutilities.client.handlers.FormatButtonsHandler;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;

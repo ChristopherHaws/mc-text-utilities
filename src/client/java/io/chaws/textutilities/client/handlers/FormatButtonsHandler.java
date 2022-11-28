@@ -1,8 +1,8 @@
-package io.chaws.textutilities.handlers.client;
+package io.chaws.textutilities.client.handlers;
 
 import com.google.common.collect.ImmutableList;
 import io.chaws.textutilities.TextUtilities;
-import io.chaws.textutilities.mixin.client.AnvilScreenAccessor;
+import io.chaws.textutilities.client.mixin.AnvilScreenAccessor;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;

@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "textutilities",
-	"version": "${version}",
+	"version": "1.1.0",
 	"name": "Text Utilities",
 	"description": "Adds buttons to format and color the text in signs, books, and anvils.",
 	"authors": [
@@ -20,10 +20,10 @@
 			"io.chaws.textutilities.TextUtilities"
 		],
 		"client": [
-			"io.chaws.textutilities.TextUtilitiesClient"
+			"io.chaws.textutilities.client.TextUtilitiesClient"
 		],
 		"modmenu": [
-			"io.chaws.textutilities.config.ModMenuIntegration"
+			"io.chaws.textutilities.client.config.ModMenuIntegration"
 		]
 	},
 	"mixins": [

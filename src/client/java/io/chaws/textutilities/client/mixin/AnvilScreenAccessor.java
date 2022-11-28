@@ -1,4 +1,4 @@
-package io.chaws.textutilities.mixin.client;
+package io.chaws.textutilities.client.mixin;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
