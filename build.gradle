@@ -1,8 +1,8 @@
 plugins {
-    // https://fabricmc.net/wiki/documentation:fabric_loom
+	// https://fabricmc.net/wiki/documentation:fabric_loom
 	id 'fabric-loom' version '1.0-SNAPSHOT'
 	id 'maven-publish'
-    id 'idea'
+	id 'idea'
 }
 
 sourceCompatibility = JavaVersion.VERSION_17
@@ -14,59 +14,59 @@ group = project.maven_group
 
 // Need to define the sourceSet so it can be referenced in loom
 sourceSets {
-    gametest { }
+	gametest { }
 }
 
 loom {
-    splitEnvironmentSourceSets()
+	splitEnvironmentSourceSets()
 
-    mods {
-        textutilities {
-            sourceSet sourceSets.main
-            sourceSet sourceSets.client
-        }
-    }
+	mods {
+		textutilities {
+			sourceSet sourceSets.main
+			sourceSet sourceSets.client
+		}
+	}
 
-    runs {
-        client {
-            runDir = "run/client"
-        }
-        server {
-            runDir = "run/server"
-        }
-        gametest {
-            client()
-            configName = "Game Test"
-            source = sourceSets.gametest
-            ideConfigGenerated = true
-            runDir "run/test"
-            vmArg "-Dfabric-api.gametest"
+	runs {
+		client {
+			runDir = "run/client"
+		}
+		server {
+			runDir = "run/server"
+		}
+		gametest {
+			client()
+			configName = "Game Test"
+			source = sourceSets.gametest
+			ideConfigGenerated = true
+			runDir "run/test"
+			vmArg "-Dfabric-api.gametest"
 			vmArg "-Dfabric-api.gametest.report-file=${project.buildDir}/junit.xml"
-            //vmArg "-Dfabric-api.gametest.server=true"
-            //vmArg "-Dfabric.autoTest"
-        }
-    }
+			//vmArg "-Dfabric-api.gametest.server=true"
+			//vmArg "-Dfabric.autoTest"
+		}
+	}
 
-    createRemapConfigurations(sourceSets.gametest)
+	createRemapConfigurations(sourceSets.gametest)
 }
 
 sourceSets {
-    test {
-        compileClasspath += client.compileClasspath
-        runtimeClasspath += client.runtimeClasspath
-    }
-    gametest {
-        compileClasspath += main.compileClasspath
-        runtimeClasspath += main.runtimeClasspath
-        compileClasspath += client.compileClasspath
-        runtimeClasspath += client.runtimeClasspath
-    }
+	test {
+		compileClasspath += client.compileClasspath
+		runtimeClasspath += client.runtimeClasspath
+	}
+	gametest {
+		compileClasspath += main.compileClasspath
+		runtimeClasspath += main.runtimeClasspath
+		compileClasspath += client.compileClasspath
+		runtimeClasspath += client.runtimeClasspath
+	}
 }
 
 repositories {
-    maven { url "https://maven.shedaniel.me/" }
-    maven { url "https://maven.terraformersmc.com/releases/" }
-    mavenCentral()
+	maven { url "https://maven.shedaniel.me/" }
+	maven { url "https://maven.terraformersmc.com/releases/" }
+	mavenCentral()
 }
 
 dependencies {
@@ -74,18 +74,18 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modApi "com.terraformersmc:modmenu:${project.modmenu_version}"
-    modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
-        exclude(group: "net.fabricmc.fabric-api")
-    }
+	modApi "com.terraformersmc:modmenu:${project.modmenu_version}"
+	modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
+		exclude(group: "net.fabricmc.fabric-api")
+	}
 
-    testImplementation(platform('org.junit:junit-bom:5.9.1'))
-    testImplementation('org.junit.jupiter:junit-jupiter')
-    testImplementation(sourceSets.client.output)
+	testImplementation(platform('org.junit:junit-bom:5.9.1'))
+	testImplementation('org.junit.jupiter:junit-jupiter')
+	testImplementation(sourceSets.client.output)
 
-    gametestImplementation sourceSets.main.output
-    gametestImplementation sourceSets.client.output
-    gametestImplementation("net.fabricmc.fabric-api:fabric-gametest-api-v1:${project.fabric_gametest_version}")
+	gametestImplementation sourceSets.main.output
+	gametestImplementation sourceSets.client.output
+	gametestImplementation("net.fabricmc.fabric-api:fabric-gametest-api-v1:${project.fabric_gametest_version}")
 }
 
 processResources {
@@ -115,11 +115,11 @@ jar {
 }
 
 test {
-    dependsOn runGametest
-    useJUnitPlatform()
-    testLogging {
-        events "passed", "skipped", "failed"
-    }
+	dependsOn runGametest
+	useJUnitPlatform()
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
 }
 
 // configure the maven publication
