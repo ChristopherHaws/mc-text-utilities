@@ -3,7 +3,7 @@
 	"id": "text-utilities-test",
 	"version": "1.0.0",
 	"name": "Text Utilities (Game Test)",
-	"license": "LGPL-3",
+	"license": "LGPL-3.0-only",
 	"environment": "*",
 	"entrypoints": {
 		"main": [

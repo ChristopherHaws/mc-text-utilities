@@ -39,7 +39,7 @@ loom {
 			configName = "Game Test"
 			source = sourceSets.gametest
 			ideConfigGenerated = true
-			runDir "run/test"
+			runDir "run/gametest"
 			vmArg "-Dfabric-api.gametest"
 			vmArg "-Dfabric-api.gametest.report-file=${project.buildDir}/junit.xml"
 			//vmArg "-Dfabric-api.gametest.server=true"
@@ -85,7 +85,7 @@ dependencies {
 
 	gametestImplementation sourceSets.main.output
 	gametestImplementation sourceSets.client.output
-	gametestImplementation("net.fabricmc.fabric-api:fabric-gametest-api-v1:${project.fabric_gametest_version}")
+	//gametestImplementation("net.fabricmc.fabric-api:fabric-gametest-api-v1:${project.fabric_gametest_version}")
 }
 
 processResources {

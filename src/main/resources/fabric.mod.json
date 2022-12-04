@@ -12,7 +12,7 @@
 		"sources": "https://github.com/ChristopherHaws/mc-text-utilities",
 		"issues": "https://github.com/ChristopherHaws/mc-text-utilities/issues"
 	},
-	"license": "LGPL-3",
+	"license": "LGPL-3.0-only",
 	"icon": "assets/textutilities/icon.png",
 	"environment": "*",
 	"entrypoints": {
