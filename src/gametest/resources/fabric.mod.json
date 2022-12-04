@@ -1,0 +1,20 @@
+{
+	"schemaVersion": 1,
+	"id": "text-utilities-test",
+	"version": "1.0.0",
+	"name": "Text Utilities (Game Test)",
+	"license": "LGPL-3.0-only",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"io.chaws.textutilities.test.TextUtilitiesGameTestMain"
+		],
+		"fabric-gametest": [
+			"io.chaws.textutilities.test.TextUtilitiesGameTestSuite"
+		]
+	},
+	"depends": {
+		"textutilities": "*",
+		"fabric-gametest-api-v1": "*"
+	}
+}

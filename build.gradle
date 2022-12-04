@@ -12,6 +12,11 @@ archivesBaseName = "${project.archives_base_name}-fabric-${project.minecraft_ver
 version = project.mod_version
 group = project.maven_group
 
+// Need to define the sourceSet so it can be referenced in loom
+sourceSets {
+	gametest { }
+}
+
 loom {
 	splitEnvironmentSourceSets()
 
@@ -29,13 +34,32 @@ loom {
 		server {
 			runDir = "run/server"
 		}
+		gametest {
+			client()
+			configName = "Game Test"
+			source = sourceSets.gametest
+			ideConfigGenerated = true
+			runDir "run/gametest"
+			vmArg "-Dfabric-api.gametest"
+			vmArg "-Dfabric-api.gametest.report-file=${project.buildDir}/junit.xml"
+			//vmArg "-Dfabric-api.gametest.server=true"
+			//vmArg "-Dfabric.autoTest"
+		}
 	}
+
+	createRemapConfigurations(sourceSets.gametest)
 }
 
 sourceSets {
 	test {
-		compileClasspath += sourceSets.client.compileClasspath
-		runtimeClasspath += sourceSets.client.runtimeClasspath
+		compileClasspath += client.compileClasspath
+		runtimeClasspath += client.runtimeClasspath
+	}
+	gametest {
+		compileClasspath += main.compileClasspath
+		runtimeClasspath += main.runtimeClasspath
+		compileClasspath += client.compileClasspath
+		runtimeClasspath += client.runtimeClasspath
 	}
 }
 
@@ -58,8 +82,11 @@ dependencies {
 	testImplementation(platform('org.junit:junit-bom:5.9.1'))
 	testImplementation('org.junit.jupiter:junit-jupiter')
 	testImplementation(sourceSets.client.output)
-}
 
+	gametestImplementation sourceSets.main.output
+	gametestImplementation sourceSets.client.output
+	//gametestImplementation("net.fabricmc.fabric-api:fabric-gametest-api-v1:${project.fabric_gametest_version}")
+}
 
 processResources {
 	inputs.property "version", project.version
@@ -88,6 +115,7 @@ jar {
 }
 
 test {
+	dependsOn runGametest
 	useJUnitPlatform()
 	testLogging {
 		events "passed", "skipped", "failed"
@@ -108,21 +136,5 @@ publishing {
 		// Notice: This block does NOT have the same function as the block in the top level.
 		// The repositories here will be used for publishing your artifact, not for
 		// retrieving dependencies.
-	}
-}
-
-task printSourceSetInformation(){
-
-	doLast{
-		sourceSets.each { srcSet ->
-			println "[" + srcSet.name + "]"
-			println "-->Source directories: " + srcSet.allJava.srcDirs
-			println "-->Output directories: " + srcSet.output.classesDirs.files
-			println "-->Compile classpath:"
-			srcSet.compileClasspath.files.each {
-				println "  " + it.path
-			}
-			println ""
-		}
 	}
 }
