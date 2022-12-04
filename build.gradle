@@ -12,6 +12,33 @@ archivesBaseName = "${project.archives_base_name}-fabric-${project.minecraft_ver
 version = project.mod_version
 group = project.maven_group
 
+loom {
+    splitEnvironmentSourceSets()
+
+    mods {
+        textutilities {
+            sourceSet sourceSets.main
+            sourceSet sourceSets.client
+        }
+    }
+
+    runs {
+        client {
+            runDir = "run/client"
+        }
+        server {
+            runDir = "run/server"
+        }
+    }
+}
+
+sourceSets {
+    test {
+        compileClasspath += sourceSets.client.compileClasspath
+        runtimeClasspath += sourceSets.client.runtimeClasspath
+    }
+}
+
 repositories {
     maven { url "https://maven.shedaniel.me/" }
     maven { url "https://maven.terraformersmc.com/releases/" }
@@ -30,7 +57,9 @@ dependencies {
 
     testImplementation(platform('org.junit:junit-bom:5.9.1'))
     testImplementation('org.junit.jupiter:junit-jupiter')
+    testImplementation(sourceSets.client.output)
 }
+
 
 processResources {
 	inputs.property "version", project.version
@@ -80,4 +109,20 @@ publishing {
 		// The repositories here will be used for publishing your artifact, not for
 		// retrieving dependencies.
 	}
+}
+
+task printSourceSetInformation(){
+
+    doLast{
+        sourceSets.each { srcSet ->
+            println "[" + srcSet.name + "]"
+            println "-->Source directories: " + srcSet.allJava.srcDirs
+            println "-->Output directories: " + srcSet.output.classesDirs.files
+            println "-->Compile classpath:"
+            srcSet.compileClasspath.files.each {
+                println "  " + it.path
+            }
+            println ""
+        }
+    }
 }
