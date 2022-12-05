@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.0]
+### Added
+- Add the ability to edit signs ([#34](https://github.com/ChristopherHaws/mc-text-utilities/pull/34))
+
+### Changes
+- Split client and server code make it harder to introduce runtime bugs ([#31](https://github.com/ChristopherHaws/mc-text-utilities/pull/31))
+- Update fabric loader to 0.14.11 ([#36](https://github.com/ChristopherHaws/mc-text-utilities/pull/36))
+- Update fabric api to 0.68.0+1.19.2 ([#36](https://github.com/ChristopherHaws/mc-text-utilities/pull/36))
+- Update modmenu to 4.1.1 ([#36](https://github.com/ChristopherHaws/mc-text-utilities/pull/36))
+
 ## [1.1.0] - 2022-11-25
 ### Added
 - Added options to disable each screen type individually ([#21](https://github.com/ChristopherHaws/mc-text-utilities/pull/21))
