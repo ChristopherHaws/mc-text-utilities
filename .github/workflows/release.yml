@@ -50,17 +50,44 @@ jobs:
           version: ${{ steps.tag_name.outputs.current_version }}
           path: ./CHANGELOG.md
 
-      - name: create or update release
-        uses: ncipollo/release-action@v1
+      - uses: Kir-Antipov/mc-publish@v3.2
         with:
-          # This pulls from the "Get Changelog Entry" step above, referencing it's ID to get its outputs object.
-          # See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          tag: v${{ steps.changelog_reader.outputs.version }}
-          name: v${{ steps.changelog_reader.outputs.version }}
-          body: ${{ steps.changelog_reader.outputs.changes }}
-          prerelease: ${{ steps.changelog_reader.outputs.status == 'prereleased' }}
-          draft: ${{ steps.changelog_reader.outputs.status == 'unreleased' }}
-          allowUpdates: true
-          token: ${{ secrets.GITHUB_TOKEN }}
-          artifactErrorsFailBuild: true
-          artifacts: 'build/libs/*.jar'
+          #modrinth-id: Read from fabric.mod.json custom.modmanager.modrinth
+          modrinth-featured: true
+          modrinth-unfeature-mode: subset
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+
+          #curseforge-id: Read from fabric.mod.json custom.modmanager.curseforge
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+
+          github-generate-changelog: false
+          github-changelog: ${{ steps.changelog_reader.outputs.changes }}
+          github-draft: false
+          github-prerelease: false
+          github-discussion: Announcements
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+          files-primary: build/libs/!(*-@(dev|sources|javadoc)).jar
+          files-secondary: build/libs/*-@(dev|sources|javadoc).jar
+
+          name: Text Utilities 1.3.0 for Minecraft 1.19.2
+          version: mc1.19.2-1.3.0
+          version-type: release
+          changelog-file: CHANGELOG.md
+
+          loaders: |
+            fabric
+          game-versions: |
+            1.19.2
+            1.19.1
+            1.19
+          dependencies: |
+            fabric-api | depends | *
+            cloth-config | depends | *
+            modmenu | suggests | *
+          java: |
+            17
+
+          retry-attempts: 2
+          retry-delay: 10000
+          fail-mode: fail
