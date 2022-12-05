@@ -11,9 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changes
 - Split client and server code make it harder to introduce runtime bugs ([#31](https://github.com/ChristopherHaws/mc-text-utilities/pull/31))
-- Update fabric loader to 0.14.11 ([#35](https://github.com/ChristopherHaws/mc-text-utilities/pull/35))
-- Update fabric api to 0.68.0+1.19.2 ([#35](https://github.com/ChristopherHaws/mc-text-utilities/pull/35))
-- Update modmenu to 4.1.1 ([#35](https://github.com/ChristopherHaws/mc-text-utilities/pull/35))
+- Update fabric loader to 0.14.11 ([#36](https://github.com/ChristopherHaws/mc-text-utilities/pull/36))
+- Update fabric api to 0.68.0+1.19.2 ([#36](https://github.com/ChristopherHaws/mc-text-utilities/pull/36))
+- Update modmenu to 4.1.1 ([#36](https://github.com/ChristopherHaws/mc-text-utilities/pull/36))
 
 ## [1.1.0] - 2022-11-25
 ### Added
