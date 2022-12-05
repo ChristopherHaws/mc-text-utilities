@@ -25,9 +25,11 @@ loom {
 	runs {
 		client {
 			runDir = "run/client"
+            vmArg "-XX:+ShowCodeDetailsInExceptionMessages"
 		}
 		server {
 			runDir = "run/server"
+            vmArg "-XX:+ShowCodeDetailsInExceptionMessages"
 		}
 	}
 }
@@ -70,8 +72,14 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
+    // ensure that the encoding is set to UTF-8, no matter what the system default is
+    // this fixes some edge cases with special characters not displaying correctly
+    // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
+    // If Javadoc is generated, this must be specified in that task too.
+    it.options.encoding = "UTF-8"
+
 	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
-	it.options.release = 17
+	it.options.release.set(17)
 }
 
 java {
@@ -97,8 +105,10 @@ test {
 // configure the maven publication
 publishing {
 	publications {
-		mavenJava(MavenPublication) {
-			from components.java
+		//noinspection GroovyAssignabilityCheck
+        mavenJava(MavenPublication) {
+			//noinspection GroovyAssignabilityCheck
+            from components.java
 		}
 	}
 
@@ -108,21 +118,5 @@ publishing {
 		// Notice: This block does NOT have the same function as the block in the top level.
 		// The repositories here will be used for publishing your artifact, not for
 		// retrieving dependencies.
-	}
-}
-
-task printSourceSetInformation(){
-
-	doLast{
-		sourceSets.each { srcSet ->
-			println "[" + srcSet.name + "]"
-			println "-->Source directories: " + srcSet.allJava.srcDirs
-			println "-->Output directories: " + srcSet.output.classesDirs.files
-			println "-->Compile classpath:"
-			srcSet.compileClasspath.files.each {
-				println "  " + it.path
-			}
-			println ""
-		}
 	}
 }
