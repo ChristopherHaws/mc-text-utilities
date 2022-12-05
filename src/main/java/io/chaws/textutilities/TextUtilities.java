@@ -1,6 +1,7 @@
 package io.chaws.textutilities;
 
 import io.chaws.textutilities.config.TextUtilitiesConfig;
+import io.chaws.textutilities.handlers.SignHandlers;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
 import net.fabricmc.api.ModInitializer;
@@ -18,5 +19,6 @@ public class TextUtilities implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		AutoConfig.register(TextUtilitiesConfig.class, Toml4jConfigSerializer::new);
+		SignHandlers.initialize();
 	}
 }

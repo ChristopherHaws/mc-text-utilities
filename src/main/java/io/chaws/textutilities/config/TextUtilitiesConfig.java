@@ -17,6 +17,9 @@ public class TextUtilitiesConfig implements ConfigData {
 	@Comment("Show or hide the formatting buttons in the anvil screen")
 	public boolean anvilFormattingEnabled = true;
 
+	@Comment("When enabled, clicking a sign with another sign will open the edit window")
+	public boolean signEditingEnabled = true;
+
 	public boolean formattingDisabled() {
 		return !this.signFormattingEnabled && !this.bookFormattingEnabled && !this.anvilFormattingEnabled;
 	}
