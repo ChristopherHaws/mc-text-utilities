@@ -5,7 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.2.0]
+## [1.2.0-1.19.3]
+### Changes
+- Update minecraft version to 1.19.3
+- Update yarn mappings version to 1.19.3+build.1
+- Update fabric loader to 0.14.11
+- Update fabric api to 0.68.1+1.19.3
+- Update modmenu to 5.0.0-alpha.4
+- Update cloth config to 9.0.93
+- Update `ButtonWidget` to use new builder method
+
+## [1.2.0-1.19.2]
 ### Added
 - Add the ability to edit signs ([#34](https://github.com/ChristopherHaws/mc-text-utilities/pull/34))
 
@@ -15,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update fabric api to 0.68.0+1.19.2 ([#36](https://github.com/ChristopherHaws/mc-text-utilities/pull/36))
 - Update modmenu to 4.1.1 ([#36](https://github.com/ChristopherHaws/mc-text-utilities/pull/36))
 
-## [1.1.0] - 2022-11-25
+## [1.1.0-1.19.2]
 ### Added
 - Added options to disable each screen type individually ([#21](https://github.com/ChristopherHaws/mc-text-utilities/pull/21))
 - Increase max width and height of chat hud ([#22](https://github.com/ChristopherHaws/mc-text-utilities/pull/22))
@@ -25,11 +35,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed issue with mod not working on fabric servers ([#15](https://github.com/ChristopherHaws/mc-text-utilities/pull/15))
 - Fixed button offsets per screen type ([#17](https://github.com/ChristopherHaws/mc-text-utilities/pull/17))
 
-## [1.0.0] - 2022-11-10
+## [1.0.0-1.19.2]
 ### Added
 - Added color and formatting buttons to the sign editor screen, anvil screen, and the book edit screen
 - Added color and formatting support to fabric server's when installed on a server
-- Added formatting code prefix configuration to support servers that don't use the the default `§` (for example, Purpur has built in support for `&`)
+- Added formatting code prefix configuration to support servers that don't use the default `§` (for example, Purpur has built in support for `&`)
 
 ### Known Issues
 - Adding formatting to the beginning of a large string can mess with the formatting of the text 

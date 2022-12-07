@@ -11,6 +11,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.AnvilScreen;
 import net.minecraft.client.gui.screen.ingame.BookEditScreen;
 import net.minecraft.client.gui.screen.ingame.SignEditScreen;
+import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
@@ -144,33 +145,27 @@ public class FormatButtonsHandler {
 	) {
 		if (formatting.isModifier() || formatting == Formatting.RESET) {
 			var label = formatting.toString().concat(formatting.getName());
-			return new ButtonWidget(
-				buttonX,
-				buttonY,
-				buttonWidth * 4,
-				buttonHeight,
-				Text.literal(label),
-				cod -> {
-					screen.charTyped(Formatting.FORMATTING_CODE_PREFIX, 0);
-					screen.charTyped(formatting.getCode(), 0);
-				}
-			);
+			return ButtonWidget.builder(
+					Text.literal(label),
+					cod -> {
+						screen.charTyped(Formatting.FORMATTING_CODE_PREFIX, 0);
+						screen.charTyped(formatting.getCode(), 0);
+					})
+				.position(buttonX, buttonY)
+				.size(buttonWidth * 4, buttonHeight)
+				.tooltip(Tooltip.of(Text.literal(label)))
+				.build();
 		}
 
-		return new ButtonWidget(
-			buttonX,
-			buttonY,
-			buttonWidth,
-			buttonHeight,
+		return ButtonWidget.builder(
 			Text.literal(formatting.toString().concat("⬛")),
 			cod -> {
 				screen.charTyped(Formatting.FORMATTING_CODE_PREFIX, 0);
 				screen.charTyped(formatting.getCode(), 0);
-			},
-			(button, matrices, mouseX, mouseY) -> {
-				var text = Text.literal(formatting.toString().concat(formatting.getName()));
-				screen.renderTooltip(matrices, text, mouseX, mouseY);
-			}
-		);
+			})
+			.position(buttonX, buttonY)
+			.size(buttonWidth, buttonHeight)
+			.tooltip(Tooltip.of(Text.literal(formatting.toString().concat(formatting.getName()))))
+			.build();
 	}
 }

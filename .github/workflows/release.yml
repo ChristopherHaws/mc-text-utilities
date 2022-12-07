@@ -70,17 +70,15 @@ jobs:
           files-primary: build/libs/!(*-@(dev|sources|javadoc)).jar
           files-secondary: build/libs/*-@(dev|sources|javadoc).jar
 
-          name: Text Utilities 1.3.0 for Minecraft 1.19.2
-          version: mc1.19.2-1.3.0
+          name: v1.2.0 for 1.19.3
+          version: 1.2.0-1.19.3
           version-type: release
           changelog-file: CHANGELOG.md
 
           loaders: |
             fabric
           game-versions: |
-            1.19.2
-            1.19.1
-            1.19
+            1.19.3
           dependencies: |
             fabric-api | depends | *
             cloth-config | depends | *
