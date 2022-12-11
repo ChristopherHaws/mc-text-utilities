@@ -13,9 +13,9 @@ import net.minecraft.world.World;
 
 import static io.chaws.textutilities.utils.PlayerUtils.*;
 
-public class SignHandlers {
+public class SignEditHandler {
 	public static void initialize() {
-		UseBlockCallback.EVENT.register(SignHandlers::onUseSignBlock);
+		UseBlockCallback.EVENT.register(SignEditHandler::onUseSignBlock);
 	}
 
 	private static ActionResult onUseSignBlock(final PlayerEntity player, final World world, final Hand hand, final BlockHitResult hitResult) {
