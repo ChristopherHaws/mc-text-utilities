@@ -20,6 +20,12 @@ public class TextUtilitiesConfig implements ConfigData {
 	@Comment("When enabled, clicking a sign with another sign will open the edit window")
 	public boolean signEditingEnabled = true;
 
+	@Comment("When enabled, clicking on a sign will open the container it is attached to")
+	public boolean signClickThroughEnabled = true;
+
+	@Comment("When enabled, clicking on an item frame will open the container it is attached to")
+	public boolean itemFrameClickThroughEnabled = true;
+
 	public boolean formattingDisabled() {
 		return !this.signFormattingEnabled && !this.bookFormattingEnabled && !this.anvilFormattingEnabled;
 	}
