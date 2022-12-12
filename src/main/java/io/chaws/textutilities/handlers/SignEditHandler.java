@@ -13,12 +13,17 @@ import net.minecraft.world.World;
 
 import static io.chaws.textutilities.utils.PlayerUtils.*;
 
-public class SignHandlers {
+public class SignEditHandler {
 	public static void initialize() {
-		UseBlockCallback.EVENT.register(SignHandlers::onUseSignBlock);
+		UseBlockCallback.EVENT.register(SignEditHandler::onUseSignBlock);
 	}
 
-	private static ActionResult onUseSignBlock(final PlayerEntity player, final World world, final Hand hand, final BlockHitResult hitResult) {
+	private static ActionResult onUseSignBlock(
+		final PlayerEntity player,
+		final World world,
+		final Hand hand,
+		final BlockHitResult hitResult
+	) {
 		if (world.isClient) {
 			return ActionResult.PASS;
 		}
@@ -36,20 +41,24 @@ public class SignHandlers {
 
 		// Dyes and Ink Sacs can be applied to signs directly when they are in the main hand
 		if (isHolding(player, Hand.MAIN_HAND, Items.INK_SAC) ||
-			isHolding(player, Hand.MAIN_HAND, Items.GLOW_INK_SAC)) {
+			isHolding(player, Hand.MAIN_HAND, Items.GLOW_INK_SAC) ||
+			isHoldingDye(player, Hand.MAIN_HAND)
+		) {
 			return ActionResult.PASS;
 		}
 
-		if (isHoldingSign(player)) {
-			signBlock.setEditable(true);
-
-			if (signBlock.isEditable()) {
-				player.openEditSignScreen(signBlock);
-			} else {
-				player.sendMessage(Text.literal("Sign is not editable"), true);
-			}
+		if (!isHoldingSign(player)) {
+			return ActionResult.PASS;
 		}
 
-		return ActionResult.PASS;
+		signBlock.setEditable(true);
+
+		if (signBlock.isEditable()) {
+			player.openEditSignScreen(signBlock);
+		} else {
+			player.sendMessage(Text.literal("Sign is not editable"), true);
+		}
+
+		return ActionResult.SUCCESS;
 	}
 }
