@@ -10,15 +10,19 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.world.World;
 
-import static io.chaws.textutilities.utils.PlayerUtils.isHolding;
-import static io.chaws.textutilities.utils.PlayerUtils.isHoldingSign;
+import static io.chaws.textutilities.utils.PlayerUtils.*;
 
 public class SignClickThroughHandler {
 	public static void initialize() {
 		UseBlockCallback.EVENT.register(SignClickThroughHandler::onUseSignBlock);
 	}
 
-	private static ActionResult onUseSignBlock(final PlayerEntity player, final World world, final Hand hand, final BlockHitResult hitResult) {
+	private static ActionResult onUseSignBlock(
+		final PlayerEntity player,
+		final World world,
+		final Hand hand,
+		final BlockHitResult hitResult
+	) {
 		if (world.isClient) {
 			return ActionResult.PASS;
 		}
@@ -30,7 +34,8 @@ public class SignClickThroughHandler {
 		// Dyes and Ink Sacs can be applied to signs directly when they are in the main hand
 		if (isHolding(player, Hand.MAIN_HAND, Items.INK_SAC) ||
 			isHolding(player, Hand.MAIN_HAND, Items.GLOW_INK_SAC) ||
-			isHoldingSign(player)) {
+			isHoldingDye(player, Hand.MAIN_HAND) ||
+			isHoldingSign(player, Hand.MAIN_HAND)) {
 			return ActionResult.PASS;
 		}
 
@@ -41,10 +46,17 @@ public class SignClickThroughHandler {
 			return ActionResult.PASS;
 		}
 
-		var newBlockPos = blockPos.add(player.getHorizontalFacing().getVector());
-		var newBlockState = world.getBlockState(newBlockPos);
-		var newHitResult = new BlockHitResult(newBlockPos.toCenterPos(), hitResult.getSide(), newBlockPos, false);
-		newBlockState.onUse(world, player, hand, newHitResult);
+		var clickThroughBlockPos = blockPos.add(
+			player.getHorizontalFacing().getVector()
+		);
+		var clickThroughBlockState = world.getBlockState(clickThroughBlockPos);
+		var clickThroughHitResult = new BlockHitResult(
+			clickThroughBlockPos.toCenterPos(),
+			hitResult.getSide(),
+			clickThroughBlockPos,
+			false
+		);
+		clickThroughBlockState.onUse(world, player, hand, clickThroughHitResult);
 
 		return ActionResult.SUCCESS;
 	}
