@@ -19,4 +19,12 @@ public class PlayerUtils {
 	public static boolean isHoldingSign(PlayerEntity player) {
 		return player.isHolding(x -> x.getItem() instanceof SignItem);
 	}
+
+	public static boolean isHoldingSign(PlayerEntity player, Hand hand) {
+		return isHolding(player, hand, x -> x.getItem() instanceof SignItem);
+	}
+
+	public static boolean isHoldingDye(PlayerEntity player, Hand hand) {
+		return isHolding(player, hand, x -> x.getItem() instanceof DyeItem);
+	}
 }
