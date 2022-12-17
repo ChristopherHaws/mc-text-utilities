@@ -1,7 +1,10 @@
 {
 	"text.autoconfig.textutilities.title": "Text Utilities",
-	"text.autoconfig.textutilities.option.signFormattingEnabled": "Sign Formatting Enabled",
-	"text.autoconfig.textutilities.option.bookFormattingEnabled": "Book Formatting Enabled",
-	"text.autoconfig.textutilities.option.anvilFormattingEnabled": "Anvil Formatting Enabled",
-	"text.autoconfig.textutilities.option.formattingCodePrefix": "Formatting Code Prefix"
+	"text.autoconfig.textutilities.option.formattingCodePrefix": "Formatting code prefix",
+	"text.autoconfig.textutilities.option.signFormattingEnabled": "Sign formatting enabled",
+	"text.autoconfig.textutilities.option.bookFormattingEnabled": "Book formatting enabled",
+	"text.autoconfig.textutilities.option.anvilFormattingEnabled": "Anvil formatting enabled",
+	"text.autoconfig.textutilities.option.signEditingEnabled": "Sign editing enabled",
+	"text.autoconfig.textutilities.option.signClickThroughEnabled": "Sign click-through enabled",
+	"text.autoconfig.textutilities.option.itemFrameClickThroughEnabled": "Item Frame click-through enabled"
 }
