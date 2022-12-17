@@ -66,11 +66,20 @@ dependencies {
 }
 
 processResources {
-	inputs.property "version", project.version
+    Map<String, String> properties = new HashMap<>()
+    properties.put("mod_id", project.mod_id)
+    properties.put("mod_name", project.mod_name)
+    properties.put("mod_version", project.mod_version)
+    properties.put("loader_version", project.loader_version)
+    properties.put("fabric_version", project.fabric_version)
+    properties.put("minecraft_version", project.minecraft_version)
+    properties.put("java_version", sourceCompatibility)
 
-	filesMatching("fabric.mod.json") {
-		expand "version": project.version
-	}
+    properties.forEach((k, v) -> inputs.property(k, v))
+
+    filesMatching("fabric.mod.json") {
+        expand properties
+    }
 }
 
 tasks.withType(JavaCompile).configureEach {

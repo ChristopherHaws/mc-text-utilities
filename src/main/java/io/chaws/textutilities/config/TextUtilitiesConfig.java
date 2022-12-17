@@ -20,17 +20,10 @@ public class TextUtilitiesConfig implements ConfigData {
 	public boolean anvilFormattingEnabled = true;
 	@ConfigEntry.Gui.EnumHandler(option = ConfigEntry.Gui.EnumHandler.EnumDisplayOption.BUTTON)
 
-
 	@Comment("When enabled, clicking a sign with another sign will open the edit window")
 	public boolean signEditingEnabled = true;
 	@Comment("When enabled, clicking on a sign will open the container it is attached to")
 	public boolean signClickThroughEnabled = true;
-	@Comment("When enabled, clicking on an item frame will open the container it is attached to")
-	public boolean itemFrameClickThroughEnabled = true;
-
-	@Comment("When enabled, clicking on a sign will open the container it is attached to")
-	public boolean signClickThroughEnabled = true;
-
 	@Comment("When enabled, clicking on an item frame will open the container it is attached to")
 	public boolean itemFrameClickThroughEnabled = true;
 
