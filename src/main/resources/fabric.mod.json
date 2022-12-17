@@ -1,8 +1,8 @@
 {
 	"schemaVersion": 1,
-	"id": "${mod_id}",
-	"version": "${mod_version}",
-	"name": "${mod_name}",
+	"id": "textutilities",
+	"version": "${version}",
+	"name": "Text Utilities",
 	"description": "Adds buttons to format and color the text in signs, books, and anvils.",
 	"authors": [
 		"chaws"
