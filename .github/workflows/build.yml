@@ -1,25 +1,16 @@
+name: build
 on:
   workflow_dispatch:
   pull_request:
-    branches:
-      - main
-      - '1.19'
-      - '1.19.3'
     paths-ignore:
       - '**/*.md'
       - '**/*.pdn'
       - '.github/FUNDING.yml'
   push:
-    branches:
-      - main
-      - '1.19'
-      - '1.19.3'
     paths-ignore:
       - '**/*.md'
       - '**/*.pdn'
       - '.github/FUNDING.yml'
-
-name: build
 
 jobs:
   build:
@@ -27,13 +18,12 @@ jobs:
       matrix:
         # Current Java LTS & minimum supported by Minecraft
         java: [17]
-        # Run on both Linux and Windows
-        os: [ubuntu-20.04, windows-2022]
+        os: [ubuntu-20.04]
     runs-on: ${{ matrix.os }}
 
     steps:
       - name: checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: validate gradle wrapper
         uses: gradle/wrapper-validation-action@v1
@@ -50,7 +40,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: build
-        run: ./gradlew build
+        run: ./gradlew build --no-daemon
 
       - name: capture build artifacts
         uses: actions/upload-artifact@v3

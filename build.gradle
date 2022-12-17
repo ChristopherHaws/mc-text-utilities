@@ -1,6 +1,8 @@
 plugins {
 	// https://fabricmc.net/wiki/documentation:fabric_loom
 	id 'fabric-loom' version '1.0-SNAPSHOT'
+    // Quiltflower is a better decompiler
+    id "io.github.juuxel.loom-quiltflower" version "1.+"
 	id 'maven-publish'
 	id 'idea'
 }
@@ -8,8 +10,9 @@ plugins {
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
+String buildNumber = System.getenv("GITHUB_RUN_NUMBER")
+version = project.mod_version + (buildNumber != null ? "-${buildNumber}" : "") + "+${project.minecraft_version}"
 archivesBaseName = "${project.archives_base_name}-fabric"
-version = project.mod_version
 group = project.maven_group
 
 loom {
@@ -42,9 +45,9 @@ sourceSets {
 }
 
 repositories {
+    mavenCentral()
 	maven { url "https://maven.shedaniel.me/" }
 	maven { url "https://maven.terraformersmc.com/releases/" }
-	mavenCentral()
 }
 
 dependencies {
@@ -61,7 +64,6 @@ dependencies {
 	testImplementation('org.junit.jupiter:junit-jupiter')
 	testImplementation(sourceSets.client.output)
 }
-
 
 processResources {
 	inputs.property "version", project.version
