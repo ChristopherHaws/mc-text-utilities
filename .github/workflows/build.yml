@@ -7,6 +7,9 @@ on:
       - '**/*.pdn'
       - '.github/FUNDING.yml'
   push:
+    branches:
+      - 'main'
+      - 'mc/**'
     paths-ignore:
       - '**/*.md'
       - '**/*.pdn'
