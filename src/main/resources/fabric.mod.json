@@ -1,7 +1,7 @@
 {
 	"schemaVersion": 1,
 	"id": "textutilities",
-	"version": "1.3.0",
+	"version": "${version}",
 	"name": "Text Utilities",
 	"description": "Adds buttons to format and color the text in signs, books, and anvils.",
 	"authors": [
@@ -36,7 +36,7 @@
 		"java": ">=17"
 	},
 	"suggests": {
-		"modmenu": ">=4"
+		"modmenu": ">=5"
 	},
 	"custom": {
 		"modmanager": {

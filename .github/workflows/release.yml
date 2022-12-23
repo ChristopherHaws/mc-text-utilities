@@ -1,9 +1,17 @@
+name: release
 on:
   push:
     tags:
-      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+      - 'v[0-9]+.[0-9]+.[0-9]+.*' # Run if someone pushes a semantic versioned tag to the GitHub repo
+  workflow_dispatch:
+    inputs:
+      test-run:
+        description: 'Test (y/n)?'
+        required: true
+        default: 'y'
 
-name: release
+env:
+  CI_RELEASE: true
 
 jobs:
   build:
@@ -51,6 +59,7 @@ jobs:
           path: ./CHANGELOG.md
 
       - uses: Kir-Antipov/mc-publish@v3.2
+        if: ${{ github.event.inputs.test-run != 'y' }}
         with:
           #modrinth-id: Read from fabric.mod.json custom.modmanager.modrinth
           modrinth-featured: true
@@ -71,7 +80,7 @@ jobs:
           files-secondary: build/libs/*-@(dev|sources|javadoc).jar
 
           name: v1.3.0 for 1.19.3
-          version: 1.3.0-1.19.3
+          version: 1.3.0+1.19.3
           version-type: release
           changelog-file: CHANGELOG.md
 
