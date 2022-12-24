@@ -6,6 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.decoration.AbstractDecorationEntity;
 import net.minecraft.entity.decoration.ItemFrameEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Items;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
@@ -45,6 +46,15 @@ public class ItemFrameClickThroughHandler {
 
 		if (!(entity instanceof AbstractDecorationEntity decorationEntity)) {
 			return ActionResult.PASS;
+		}
+
+		if (decorationEntity instanceof ItemFrameEntity itemFrameEntity) {
+			var heldItem = itemFrameEntity.getHeldItemStack();
+			if (heldItem.isOf(Items.AIR)) {
+				// If the item frame has no item attached to it,
+				// attach the item and don't click through to the chest.
+				return ActionResult.PASS;
+			}
 		}
 
 		var attachedBlockPos = decorationEntity.getDecorationBlockPos().add(

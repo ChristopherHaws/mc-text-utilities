@@ -16,7 +16,10 @@ options to signs, books, and anvils.
 ## Features
 - Adds color and formatting buttons to the sign editor screen, anvil screen, and the book edit screen
 - Adds color and formatting support to fabric server's when installed on a server
-- Formatting code prefix is configurable to support servers that don't use the the default `§` (for example, Purpur has built in support for `&`)
+- Formatting code prefix is configurable to support servers that don't use the default `§` (for example, Purpur has built in support for `&`)
+- Adds the ability to click-through signs and item frames when they are attached to containers
+	- Sign click through is prevented when holding a sign, dye, an ink sac, or a glowing ink sac in your main hand
+	- Item Frame click through is prevented while sneaking or if the item frame has no item in it
 
 NOTE: At the moment, you have to press a color before a format button if you want to use both.
 
@@ -37,7 +40,8 @@ guides for doing so [here](https://fabricmc.net/wiki/install).
 #### Stable releases
 ![GitHub release](https://img.shields.io/github/release/ChristopherHaws/mc-text-utilities.svg)
 
-The latest releases of Text Utilities are published to our [Modrinth](https://modrinth.com/mod/text-utilities)
+The latest releases of Text Utilities are published to our [Modrinth](https://modrinth.com/mod/text-utilities),
+[CurseForge](https://www.curseforge.com/minecraft/mc-mods/text-utilities),
 and [GitHub release](https://github.com/ChristopherHaws/mc-text-utilities/releases) pages. Releases
 are considered to be **suitable for general use**, but they are not guaranteed to be free of bugs 
 and other issues.
@@ -45,7 +49,7 @@ and other issues.
 Usually, releases will be made available on GitHub slightly sooner than other locations.
 
 #### Bleeding-edge builds (unstable)
-[![GitHub build status](https://img.shields.io/github/workflow/status/ChristopherHaws/mc-text-utilities/build/1.19)](https://github.com/ChristopherHaws/mc-text-utilities/actions/workflows/build.yml)
+[![GitHub build status](https://img.shields.io/github/actions/workflow/status/ChristopherHaws/mc-text-utilities/build.yml?branch=main)](https://github.com/ChristopherHaws/mc-text-utilities/actions/workflows/build.yml)
 
 If you are a player who is looking to get your hands on the latest **bleeding-edge changes for 
 testing**, consider taking a look at the automated builds produced through our
@@ -71,4 +75,4 @@ features necessary for parity with the vanilla renderer.
 ---
 ### License
 Text Utilities is licensed under GNU LGPLv3, a free and open-source license. For more information, 
-please see the [license file](https://github.com/ChristopherHaws/mc-text-utilities/blob/1.19/LICENSE).
+please see the [license file](https://github.com/ChristopherHaws/mc-text-utilities/blob/main/LICENSE).
