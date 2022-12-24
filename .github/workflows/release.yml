@@ -2,7 +2,7 @@ name: release
 on:
   push:
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+.*' # Run if someone pushes a semantic versioned tag to the GitHub repo
+      - 'v*' # Run if someone pushes a semantic versioned tag to the GitHub repo
   workflow_dispatch:
     inputs:
       test-run:
@@ -19,10 +19,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: read version from tag
-        id: tag_name
-        run: |
-          echo ::set-output name=current_version::${GITHUB_REF#refs/tags/v}
+        id: version_read
+        run: echo "tag_version=${GITHUB_REF#refs/tags/v}" >> $GITHUB_ENV
         shell: bash
+
+      # https://github.com/marketplace/actions/semver-utils
+      - uses: madhead/semver-utils@latest
+        id: version
+        with:
+          # Fail the task if it can't parse the version
+          lenient: false
+          version: ${{ env.tag_version }}
+
+      - name: log parsed semver
+        id: version_log
+        shell: bash
+        run: |
+          echo "release = ${{ steps.version.outputs.release }}"                       # 1.2.3
+          echo "major = ${{ steps.version.outputs.major }}"                           # 1
+          echo "minor = ${{ steps.version.outputs.minor }}"                           # 2
+          echo "patch = ${{ steps.version.outputs.patch }}"                           # 3
+          echo "build = ${{ steps.version.outputs.build }}"                           # 42.24
+          echo "build-parts = ${{ steps.version.outputs.build-parts }}"               # 2
+          echo "build-0 = ${{ steps.version.outputs.build-0 }}"                       # 42
+          echo "build-1 = ${{ steps.version.outputs.build-1 }}"                       # 24
+          echo "comparison-result = ${{ steps.version.outputs.comparison-result }}"   # <
+          echo "satisfies = ${{ steps.version.outputs.satisfies }}"                   # true
+          echo "inc-major = ${{ steps.version.outputs.inc-major }}"                   # 2.0.0
+          echo "inc-premajor = ${{ steps.version.outputs.inc-premajor }}"             # 2.0.0-0
+          echo "inc-minor = ${{ steps.version.outputs.inc-minor }}"                   # 1.3.0
+          echo "inc-preminor = ${{ steps.version.outputs.inc-preminor }}"             # 1.3.0-0
+          echo "inc-patch = ${{ steps.version.outputs.inc-patch }}"                   # 1.2.4
+          echo "inc-prepatch = ${{ steps.version.outputs.inc-prepatch }}"             # 1.2.4-0
+          echo "inc-prerelease = ${{ steps.version.outputs.inc-prerelease }}"         # 1.2.4-0
 
       - name: checkout repository
         uses: actions/checkout@v2
@@ -55,7 +84,7 @@ jobs:
         uses: mindsers/changelog-reader-action@v2
         with:
           validation_level: warn
-          version: ${{ steps.tag_name.outputs.current_version }}
+          version: ${{ steps.version.outputs.release }}
           path: ./CHANGELOG.md
 
       - uses: Kir-Antipov/mc-publish@v3.2
@@ -79,8 +108,8 @@ jobs:
           files-primary: build/libs/!(*-@(dev|sources|javadoc)).jar
           files-secondary: build/libs/*-@(dev|sources|javadoc).jar
 
-          name: v1.3.0 for 1.19.3
-          version: 1.3.0+1.19.3
+          name: v${{ steps.version.outputs.release }} for ${{ steps.version.outputs.build }}
+          version: ${{ steps.version.outputs.release }}+${{ steps.version.outputs.build }}
           version-type: release
           changelog-file: CHANGELOG.md
 
