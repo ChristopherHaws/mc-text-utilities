@@ -19,16 +19,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update cloth config to 9.0.94
 
 ## [1.2.0]
-### Changes
-- Update minecraft version to 1.19.3
-- Update yarn mappings version to 1.19.3+build.1
-- Update fabric loader to 0.14.11
-- Update fabric api to 0.68.1+1.19.3
-- Update modmenu to 5.0.0-alpha.4
-- Update cloth config to 9.0.94
-- Update `ButtonWidget` to use new builder method
-
-## [1.2.0]
 ### Added
 - Add the ability to edit signs ([#34](https://github.com/ChristopherHaws/mc-text-utilities/pull/34))
 
@@ -37,6 +27,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Update fabric loader to 0.14.11 ([#36](https://github.com/ChristopherHaws/mc-text-utilities/pull/36))
 - Update fabric api to 0.68.0+1.19.2 ([#36](https://github.com/ChristopherHaws/mc-text-utilities/pull/36))
 - Update modmenu to 4.1.1 ([#36](https://github.com/ChristopherHaws/mc-text-utilities/pull/36))
+- Update minecraft version to 1.19.3
+- Update yarn mappings version to 1.19.3+build.1
+- Update fabric loader to 0.14.11
+- Update fabric api to 0.68.1+1.19.3
+- Update modmenu to 5.0.0-alpha.4
+- Update cloth config to 9.0.94
+- Update `ButtonWidget` to use new builder method
 
 ## [1.1.0]
 ### Added
