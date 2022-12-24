@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Sign click through is prevented when holding a sign, dye, an ink sac, or a glowing ink sac in your main hand
   - Item Frame click through is prevented while sneaking or if the item frame has no item in it
 
+## Changes
+- Update fabric loader to 0.14.12
+- Update fabric api to 0.70.0+1.19.2
+
 ## [1.2.0]
 ### Added
 - Add the ability to edit signs ([#34](https://github.com/ChristopherHaws/mc-text-utilities/pull/34))
