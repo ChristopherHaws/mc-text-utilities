@@ -94,6 +94,7 @@ static def testMods(DependencyHandler deps) {
 //    deps.modLocalRuntime("maven.modrinth:sodium:mc1.19.2-0.4.4")
 //    deps.modLocalRuntime("maven.modrinth:starlight:1.1.1+1.19")
 //    deps.modLocalRuntime("maven.modrinth:roughly-enough-items:9.1.580+fabric")
+//    deps.modLocalRuntime("maven.modrinth:create-fabric:0.5.0g-796+1.19.2")
 }
 
 processResources {
