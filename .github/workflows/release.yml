@@ -11,7 +11,7 @@ on:
         default: 'y'
 
 env:
-  CI_RELEASE: true
+  APPEND_BUILD_NUMBER: false
 
 jobs:
   build:
