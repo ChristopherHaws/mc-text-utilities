@@ -34,6 +34,10 @@ public class TextUtilitiesConfig implements ConfigData {
 	public boolean signEditingEnabled = true;
 
 	@ConfigEntry.Gui.Tooltip
+	@Comment("Whether or not to open the edit screen when sneaking and placing signs")
+	public boolean bypassEditScreenWhenSneakPlacingSigns = true;
+
+	@ConfigEntry.Gui.Tooltip
 	@Comment("When enabled, clicking on a sign will open the container it is attached to")
 	public boolean signClickThroughEnabled = true;
 

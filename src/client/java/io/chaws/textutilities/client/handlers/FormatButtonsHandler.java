@@ -7,10 +7,9 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.fabricmc.fabric.api.client.screen.v1.Screens;
+import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.gui.screen.ingame.AnvilScreen;
-import net.minecraft.client.gui.screen.ingame.BookEditScreen;
-import net.minecraft.client.gui.screen.ingame.SignEditScreen;
+import net.minecraft.client.gui.screen.ingame.*;
 import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
@@ -50,12 +49,36 @@ public class FormatButtonsHandler {
 	);
 
 	public static void initialize() {
-		ScreenEvents.AFTER_INIT.register((client, screen, width, height) ->
-			onScreenOpened(screen)
-		);
+		ScreenEvents.BEFORE_INIT.register(FormatButtonsHandler::handleScreenOpening);
+		ScreenEvents.AFTER_INIT.register(FormatButtonsHandler::handleScreenOpened);
 	}
 
-	private static void onScreenOpened(Screen screen) {
+	private static void handleScreenOpening(
+		final MinecraftClient client,
+		final Screen screen,
+		final int scaledWidth,
+		final int scaledHeight
+	) {
+		var player = client.player;
+		if (player == null) {
+			return;
+		}
+
+		var config = TextUtilities.getConfig();
+		if (config.bypassEditScreenWhenSneakPlacingSigns &&
+			player.isSneaking() &&
+			screen instanceof AbstractSignEditScreen abstractSignEditScreen
+		) {
+			abstractSignEditScreen.close();
+		}
+	}
+
+	private static void handleScreenOpened(
+		final MinecraftClient client,
+		final Screen screen,
+		final int scaledWidth,
+		final int scaledHeight
+	) {
 		var config = TextUtilities.getConfig();
 		var xOffsetFromCenter = 0;
 		var yOffset = 0;

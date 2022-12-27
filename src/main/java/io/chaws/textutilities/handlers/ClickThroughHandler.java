@@ -68,6 +68,8 @@ public class ClickThroughHandler {
 			return ActionResult.PASS;
 		}
 
+		var config = TextUtilities.getConfig();
+
 		if (player.isSneaking()) {
 			return ActionResult.PASS;
 		}
@@ -75,8 +77,6 @@ public class ClickThroughHandler {
 		if (entityHitResult == null) {
 			return ActionResult.PASS;
 		}
-
-		var config = TextUtilities.getConfig();
 
 		if (!canClickThroughEntity(config, entity)) {
 			return ActionResult.PASS;
