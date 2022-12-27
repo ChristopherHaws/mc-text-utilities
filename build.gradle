@@ -11,8 +11,7 @@ sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
 String buildNumber = System.getenv("GITHUB_RUN_NUMBER")
-Boolean isRelease = System.getenv("CI_RELEASE") == "true"
-Boolean appendBuildNumber = isRelease && buildNumber != null
+Boolean appendBuildNumber = System.getenv("APPEND_BUILD_NUMBER") == "true" && buildNumber != null
 
 version = project.mod_version +
         (appendBuildNumber ? "-build${buildNumber}" : "") +
@@ -32,11 +31,11 @@ loom {
 
 	runs {
 		client {
-			runDir = "run/client"
+			runDir = "run/1.19.2/client"
             vmArg "-XX:+ShowCodeDetailsInExceptionMessages"
 		}
 		server {
-			runDir = "run/server"
+			runDir = "run/1.19.2/server"
             vmArg "-XX:+ShowCodeDetailsInExceptionMessages"
 		}
 	}
