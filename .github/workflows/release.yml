@@ -88,6 +88,7 @@ jobs:
           version: ${{ steps.version.outputs.release }}+${{ steps.version.outputs.build }}
           version-type: release
           changelog-file: CHANGELOG.md
+          changelog: ${{ steps.changelog_reader.outputs.changes }}
 
           loaders: |
             fabric
@@ -113,7 +114,6 @@ jobs:
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
 
           github-generate-changelog: false
-          github-changelog: ${{ steps.changelog_reader.outputs.changes }}
           github-draft: false
           github-prerelease: false
           github-discussion: Announcements
