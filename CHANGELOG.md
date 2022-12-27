@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [1.3.1]
+### Fixed
+- Build number should not show up in the jar name anymore
 
 ## [1.3.0]
 ### Added
@@ -13,7 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Sign click through is prevented when holding a sign, dye, an ink sac, or a glowing ink sac in your main hand
   - Item Frame click through is prevented while sneaking or if the item frame has no item in it
 
-### Changes
+### Changed
 - Update yarn mappings version to 1.19.3+build.5
 - Update fabric loader to 0.14.12
 - Update fabric api to 0.70.0+1.19.3
@@ -24,7 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 - Add the ability to edit signs ([#34](https://github.com/ChristopherHaws/mc-text-utilities/pull/34))
 
-### Changes
+### Changed
 - Split client and server code make it harder to introduce runtime bugs ([#31](https://github.com/ChristopherHaws/mc-text-utilities/pull/31))
 - Update fabric loader to 0.14.11 ([#36](https://github.com/ChristopherHaws/mc-text-utilities/pull/36))
 - Update fabric api to 0.68.0+1.19.2 ([#36](https://github.com/ChristopherHaws/mc-text-utilities/pull/36))
