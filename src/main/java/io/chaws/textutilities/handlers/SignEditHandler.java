@@ -28,6 +28,10 @@ public class SignEditHandler {
 			return ActionResult.PASS;
 		}
 
+		if (player.isSneaking()) {
+			return ActionResult.PASS;
+		}
+
 		if (!TextUtilities.getConfig().signEditingEnabled) {
 			return ActionResult.PASS;
 		}
