@@ -1,11 +1,14 @@
 package io.chaws.textutilities.config;
 
+import com.google.common.collect.Lists;
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
 import me.shedaniel.autoconfig.annotation.ConfigEntry;
 import me.shedaniel.cloth.clothconfig.shadowed.blue.endless.jankson.Comment;
 import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.ApiStatus;
+
+import java.util.List;
 
 @ApiStatus.Internal
 @Config(name = "textutilities")
@@ -37,6 +40,11 @@ public class TextUtilitiesConfig implements ConfigData {
 	@ConfigEntry.Gui.Tooltip
 	@Comment("When enabled, clicking on an item frame will open the container it is attached to")
 	public boolean itemFrameClickThroughEnabled = true;
+
+	@Comment("Additional item identifiers of blocks or entities to allow clicking through.")
+	public List<String> additionalClickThroughIdentifiers = Lists.newArrayList(
+		"create:placard"
+	);
 
 	public boolean formattingDisabled() {
 		return !this.signFormattingEnabled && !this.bookFormattingEnabled && !this.anvilFormattingEnabled;

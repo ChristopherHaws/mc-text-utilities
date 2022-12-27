@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.3.1]
 ### Added
+- Added the ability to include additional click through blocks or entities
+  - Added `create:placard` as an example which adds mod compatibility
 - Tooltips are now shown when hovering over config settings
 
 ### Fixed
