@@ -12,6 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Tooltips are now shown when hovering over config settings
 
 ### Fixed
+- Fixed an issue where you couldn't place a sign on another sign
 - Build number should not show up in the jar name anymore
 
 ## [1.3.0]
