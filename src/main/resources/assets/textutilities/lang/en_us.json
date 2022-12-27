@@ -14,6 +14,6 @@
 	"text.autoconfig.textutilities.option.signClickThroughEnabled.@Tooltip": "When enabled, clicking on a sign will open the container it is attached to",
 	"text.autoconfig.textutilities.option.itemFrameClickThroughEnabled": "Item Frame click-through enabled",
 	"text.autoconfig.textutilities.option.itemFrameClickThroughEnabled.@Tooltip": "When enabled, clicking on an item frame will open the container it is attached to",
-	"text.autoconfig.textutilities.option.additionalClickThroughIdentifiers": "Additional Click Through Identifiers",
+	"text.autoconfig.textutilities.option.additionalClickThroughIdentifiers": "Additional click-through blocks/entities",
 	"text.autoconfig.textutilities.option.additionalClickThroughIdentifiers.@Tooltip": "Additional item identifiers of blocks or entities to allow clicking through."
 }
