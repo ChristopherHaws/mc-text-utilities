@@ -1,8 +1,7 @@
 package io.chaws.textutilities;
 
 import io.chaws.textutilities.config.TextUtilitiesConfig;
-import io.chaws.textutilities.handlers.ItemFrameClickThroughHandler;
-import io.chaws.textutilities.handlers.SignClickThroughHandler;
+import io.chaws.textutilities.handlers.ClickThroughHandler;
 import io.chaws.textutilities.handlers.SignEditHandler;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.serializer.Toml4jConfigSerializer;
@@ -22,7 +21,6 @@ public class TextUtilities implements ModInitializer {
 	public void onInitialize() {
 		AutoConfig.register(TextUtilitiesConfig.class, Toml4jConfigSerializer::new);
 		SignEditHandler.initialize();
-		SignClickThroughHandler.initialize();
-		ItemFrameClickThroughHandler.initialize();
+		ClickThroughHandler.initialize();
 	}
 }
