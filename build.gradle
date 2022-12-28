@@ -53,6 +53,11 @@ repositories {
 	maven { url = "https://maven.shedaniel.me/" }
 	maven { url = "https://maven.terraformersmc.com/releases/" }
     maven { url = "https://maven.fabricmc.net/" }
+    maven { url = "https://mvn.devos.one/snapshots/" } // Create Mod
+    maven { url = "https://maven.tterrag.com/" } // Registrate and Flywheel
+    maven { url = "https://maven.cafeteria.dev/releases" } // Fake Player API
+    maven { url = "https://maven.jamieswhiteshirt.com/libs-release" } // Reach Entity Attributes
+    maven { url = "https://jitpack.io/" } // Mixin Extras, fabric ASM
 
     exclusiveContent {
         forRepository {
@@ -90,11 +95,34 @@ dependencies {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 
+    // Create Mod
+    createModCompat(dependencies)
+
+    // Unit Tests
 	testImplementation(platform('org.junit:junit-bom:5.9.1'))
 	testImplementation('org.junit.jupiter:junit-jupiter')
 	testImplementation(sourceSets.client.output)
 
+    // Mods that are useful for local development
     devMods(dependencies)
+}
+
+def createModCompat(DependencyHandler deps) {
+    deps.modApi("com.simibubi.create:create-fabric-${project.minecraft_version}:${project.create_version}") { transitive = false }
+    deps.modApi("io.github.fabricators_of_create.Porting-Lib:porting-lib:${project.port_lib_version}+${project.minecraft_version}")
+    deps.modApi("com.electronwill.night-config:core:${project.night_config_core_version}")
+    deps.modApi("com.electronwill.night-config:toml:${project.night_config_toml_version}")
+    deps.modApi("curse.maven:forge-config-api-port-fabric-547434:${project.config_api_id}")
+    deps.modApi("com.tterrag.registrate_fabric:Registrate:${project.registrate_version}")
+    deps.modApi("com.jozufozu.flywheel:flywheel-fabric-${flywheel_minecraft_version}:${project.flywheel_version}")
+    deps.modApi("com.jamieswhiteshirt:reach-entity-attributes:${project.reach_entity_attributes_version}")
+    deps.modApi("dev.cafeteria:fake-player-api:${project.fake_player_api_version}")
+    deps.modApi("io.github.tropheusj:milk-lib:${project.milk_lib_version}")
+    deps.implementation("com.google.code.findbugs:jsr305:${project.jsr305_version}")
+
+    // used to prevent forge config api port from complaining
+    deps.modApi("com.github.AlphaMode:fakeconfig:master-SNAPSHOT") { exclude(group: "net.fabricmc.fabric-api") }
+    deps.modApi("com.github.AlphaMode:fakeconfigtoml:master-SNAPSHOT") { exclude(group: "net.fabricmc.fabric-api") }
 }
 
 // Mods that are useful for local development
@@ -118,6 +146,17 @@ processResources {
     properties.put("fabric_version", project.fabric_version)
     properties.put("minecraft_version", project.minecraft_version)
     properties.put("java_version", sourceCompatibility)
+
+    // Create Mod
+    properties.put("registrate_version", project.registrate_version)
+    properties.put("flywheel_version", project.flywheel_version)
+    properties.put("port_lib_version", "${project.port_lib_version}+${project.minecraft_version}")
+    properties.put("forge_config_api_port_version", project.forge_config_api_port_version)
+    properties.put("reach_entity_attributes_version", project.reach_entity_attributes_version)
+    properties.put("fake_player_api_version", project.fake_player_api_version)
+    properties.put("milk_lib_version", project.milk_lib_version)
+    properties.put("night_config_core_version", project.night_config_core_version)
+    properties.put("night_config_toml_version", project.night_config_toml_version)
 
     properties.forEach((k, v) -> inputs.property(k, v))
 

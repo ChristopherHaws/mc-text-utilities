@@ -1,9 +1,11 @@
 package io.chaws.textutilities.handlers;
 
+import com.simibubi.create.content.curiosities.deco.PlacardTileEntity;
 import io.chaws.textutilities.TextUtilities;
 import io.chaws.textutilities.config.TextUtilitiesConfig;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -158,6 +160,12 @@ public class ClickThroughHandler {
 				!isHolding(player, Hand.MAIN_HAND, Items.GLOW_INK_SAC) &&
 				!isHoldingDye(player, Hand.MAIN_HAND) &&
 				!isHoldingSign(player, Hand.MAIN_HAND);
+		}
+
+		if (FabricLoader.getInstance().isModLoaded("create")) {
+			if (blockEntity instanceof PlacardTileEntity placard) {
+				return !placard.getHeldItem().isOf(Items.AIR);
+			}
 		}
 
 		var blockEntityType = blockEntity.getType();

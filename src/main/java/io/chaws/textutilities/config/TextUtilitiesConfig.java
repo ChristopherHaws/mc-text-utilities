@@ -9,6 +9,7 @@ import net.minecraft.util.Formatting;
 import org.jetbrains.annotations.ApiStatus;
 
 import java.util.List;
+import java.util.Objects;
 
 @ApiStatus.Internal
 @Config(name = "textutilities")
@@ -42,9 +43,7 @@ public class TextUtilitiesConfig implements ConfigData {
 	public boolean itemFrameClickThroughEnabled = true;
 
 	@Comment("Additional item identifiers of blocks or entities to allow clicking through.")
-	public List<String> additionalClickThroughIdentifiers = Lists.newArrayList(
-		"create:placard"
-	);
+	public List<String> additionalClickThroughIdentifiers = Lists.newArrayList();
 
 	public boolean formattingDisabled() {
 		return !this.signFormattingEnabled && !this.bookFormattingEnabled && !this.anvilFormattingEnabled;
@@ -55,6 +54,9 @@ public class TextUtilitiesConfig implements ConfigData {
 
 	@Override
 	public void validatePostLoad() throws ValidationException {
+		// Adding these blocks will break the mod
+		additionalClickThroughIdentifiers.removeIf(id -> Objects.equals(id, "create:placard"));
+
 		if (this.formattingCodePrefix == null || this.formattingCodePrefix.length() > 1) {
 			throw new ValidationException("Formatting code should be 1 character long.");
 		}
