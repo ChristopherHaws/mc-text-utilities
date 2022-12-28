@@ -147,17 +147,6 @@ processResources {
     properties.put("minecraft_version", project.minecraft_version)
     properties.put("java_version", sourceCompatibility)
 
-    // Create Mod
-    properties.put("registrate_version", project.registrate_version)
-    properties.put("flywheel_version", project.flywheel_version)
-    properties.put("port_lib_version", "${project.port_lib_version}+${project.minecraft_version}")
-    properties.put("forge_config_api_port_version", project.forge_config_api_port_version)
-    properties.put("reach_entity_attributes_version", project.reach_entity_attributes_version)
-    properties.put("fake_player_api_version", project.fake_player_api_version)
-    properties.put("milk_lib_version", project.milk_lib_version)
-    properties.put("night_config_core_version", project.night_config_core_version)
-    properties.put("night_config_toml_version", project.night_config_toml_version)
-
     properties.forEach((k, v) -> inputs.property(k, v))
 
     filesMatching("fabric.mod.json") {
