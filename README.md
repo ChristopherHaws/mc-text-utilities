@@ -14,14 +14,20 @@ options to signs, books, and anvils.
 ---
 
 ## Features
-- Adds color and formatting buttons to the sign editor screen, anvil screen, and the book edit screen
-- Adds color and formatting support to fabric server's when installed on a server
-- Formatting code prefix is configurable to support servers that don't use the default `§` (for example, Purpur has built in support for `&`)
-- Adds the ability to click-through signs and item frames when they are attached to containers
-	- Sign click through is prevented when holding a sign, dye, an ink sac, or a glowing ink sac in your main hand
-	- Item Frame click through is prevented while sneaking or if the item frame has no item in it
+- Adds color and formatting buttons to the sign editor screen, anvil screen, and the book edit screen.
+- Adds color and formatting support to fabric server's when installed on a server.
+- Formatting code prefix is configurable to support servers that don't use the default `§` (for example, Purpur has built in support for `&`).
+- Adds the ability to click-through signs and item frames when they are attached to containers.
+	- Sign click through is prevented when holding a sign, dye, an ink sac, or a glowing ink sac in your main hand.
+	- Item Frame click through is prevented while sneaking or if the item frame has no item in it.
+    - Supports adding custom blocks/entites to the click-through list
+- Increases max width and height of chat hud so that you can adjust it to your liking.
 
 NOTE: At the moment, you have to press a color before a format button if you want to use both.
+
+**Supported Mods**
+- [Create Mod](https://modrinth.com/mod/create-fabric)
+  - Adds click-through functionality to `create:placard`
 
 ![image](https://user-images.githubusercontent.com/5934505/201258398-e3b3ea7f-af3e-4e69-8bc4-4e0713880568.png)
 
