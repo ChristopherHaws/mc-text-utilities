@@ -31,11 +31,11 @@ loom {
 
 	runs {
 		client {
-			runDir = "run/1.19.3/client"
+			runDir = "run/${project.minecraft_version}/client"
             vmArg "-XX:+ShowCodeDetailsInExceptionMessages"
 		}
 		server {
-			runDir = "run/1.19.3/server"
+			runDir = "run/${project.minecraft_version}/server"
             vmArg "-XX:+ShowCodeDetailsInExceptionMessages"
 		}
 	}
@@ -52,8 +52,19 @@ repositories {
     mavenCentral()
 	maven { url = "https://maven.shedaniel.me/" }
 	maven { url = "https://maven.terraformersmc.com/releases/" }
-    maven { url = "https://cursemaven.com" }
     maven { url = "https://maven.fabricmc.net/" }
+
+	exclusiveContent {
+		forRepository {
+			maven {
+				name = "CurseForge"
+				url = "https://cursemaven.com"
+			}
+		}
+		filter {
+			includeGroup "curse.maven"
+		}
+	}
 
     // https://docs.modrinth.com/docs/tutorials/maven/#advanced-repository-declaration-recommended
     exclusiveContent {
@@ -74,25 +85,32 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	modApi "com.terraformersmc:modmenu:${project.modmenu_version}"
-	modApi("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
+
+	// Mod Compatibility (optional dependencies)
+	modImplementation "com.terraformersmc:modmenu:${project.modmenu_version}"
+	modImplementation("me.shedaniel.cloth:cloth-config-fabric:${project.cloth_config_version}") {
 		exclude(group: "net.fabricmc.fabric-api")
 	}
 
+	// Unit Tests
 	testImplementation(platform('org.junit:junit-bom:5.9.1'))
 	testImplementation('org.junit.jupiter:junit-jupiter')
 	testImplementation(sourceSets.client.output)
 
-    testMods(dependencies)
+	// Mods that are useful for local development
+	devMods(dependencies)
 }
 
 // mods that can be uncommented to test in development
-static def testMods(DependencyHandler deps) {
+static def devMods(DependencyHandler deps) {
     deps.modLocalRuntime("maven.modrinth:lazydfu:0.1.3")
     deps.modLocalRuntime("maven.modrinth:lithium:mc1.19.3-0.10.4")
     deps.modLocalRuntime("maven.modrinth:sodium:mc1.19.3-0.4.7")
     deps.modLocalRuntime("maven.modrinth:starlight:1.1.1+1.19")
-    //deps.modLocalRuntime("me.shedaniel:RoughlyEnoughItems-fabric:${project.rei_version}") { transitive = false }
+	deps.modLocalRuntime("maven.modrinth:architectury-api:7.0.66+fabric")
+    deps.modLocalRuntime("maven.modrinth:roughly-enough-items:10.0.581+fabric")
+    deps.modLocalRuntime("maven.modrinth:auth-me:5.0.0")
+    deps.modLocalRuntime("maven.modrinth:expanded-storage:9.0.0-alpha.2+fabric")
 }
 
 processResources {
