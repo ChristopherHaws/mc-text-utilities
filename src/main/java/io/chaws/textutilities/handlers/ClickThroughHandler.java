@@ -1,11 +1,12 @@
 package io.chaws.textutilities.handlers;
 
+import static io.chaws.textutilities.utils.PlayerUtils.*;
+
 import com.simibubi.create.content.curiosities.deco.PlacardTileEntity;
 import io.chaws.textutilities.TextUtilities;
 import io.chaws.textutilities.config.TextUtilitiesConfig;
-import net.fabricmc.fabric.api.event.player.UseBlockCallback;
-import net.fabricmc.fabric.api.event.player.UseEntityCallback;
-import net.fabricmc.loader.api.FabricLoader;
+import org.jetbrains.annotations.Nullable;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
@@ -25,10 +26,10 @@ import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
-import static io.chaws.textutilities.utils.ItemFrameEntityUtils.rotateItemCounterClockwise;
-import static io.chaws.textutilities.utils.PlayerUtils.*;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.fabricmc.fabric.api.event.player.UseEntityCallback;
+import net.fabricmc.loader.api.FabricLoader;
 
 public class ClickThroughHandler {
 	public static void initialize() {
@@ -42,10 +43,6 @@ public class ClickThroughHandler {
 		final Hand hand,
 		final BlockHitResult hitResult
 	) {
-		if (world.isClient) {
-			return ActionResult.PASS;
-		}
-
 		if (player.isSneaking()) {
 			return ActionResult.PASS;
 		}
@@ -67,10 +64,6 @@ public class ClickThroughHandler {
 		final Entity entity,
 		final @Nullable EntityHitResult entityHitResult
 	) {
-		if (world.isClient) {
-			return ActionResult.PASS;
-		}
-
 		if (player.isSneaking()) {
 			return ActionResult.PASS;
 		}
@@ -93,12 +86,6 @@ public class ClickThroughHandler {
 			);
 
 			useBlock(world, player, decorationBlockPos, entityFacing, hand);
-
-			//HACK: Need to figure out a better way to disable the rotation of the item
-			if (decorationEntity instanceof ItemFrameEntity itemFrameEntity) {
-				// Reset the item rotation
-				rotateItemCounterClockwise(itemFrameEntity);
-			}
 
 			return ActionResult.SUCCESS;
 		}
@@ -215,6 +202,7 @@ public class ClickThroughHandler {
 			attachedBlockPos,
 			false
 		);
+
 		attachedBlockState.onUse(world, player, hand, attachedBlockHitResult);
 	}
 }
