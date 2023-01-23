@@ -107,7 +107,7 @@ static def devMods(DependencyHandler deps) {
     deps.modLocalRuntime("maven.modrinth:lithium:mc1.19.3-0.10.4")
     deps.modLocalRuntime("maven.modrinth:sodium:mc1.19.3-0.4.7")
     deps.modLocalRuntime("maven.modrinth:starlight:1.1.1+1.19")
-	deps.modLocalRuntime("maven.modrinth:architectury-api:7.0.66+fabric")
+	deps.modLocalRuntime("maven.modrinth:architectury-api:8.0.67+")
     deps.modLocalRuntime("maven.modrinth:roughly-enough-items:10.0.581+fabric")
     deps.modLocalRuntime("maven.modrinth:auth-me:5.0.0")
     deps.modLocalRuntime("maven.modrinth:expanded-storage:9.0.0-alpha.2+fabric")
