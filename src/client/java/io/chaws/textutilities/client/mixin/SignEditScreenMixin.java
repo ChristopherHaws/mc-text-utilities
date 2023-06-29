@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(AbstractSignEditScreen.class)
 public class SignEditScreenMixin {
 	@Final @Shadow
-	protected String[] text;
+	private String[] messages;
 
 	@Inject(method = "init", at = @At("TAIL"))
 	private void init(CallbackInfo ci) {
@@ -24,7 +24,7 @@ public class SignEditScreenMixin {
 			return;
 		}
 
-		FormattingUtils.replaceConfiguredPrefixWithBuiltInPrefix(text);
+		FormattingUtils.replaceConfiguredPrefixWithBuiltInPrefix(messages);
 	}
 
 	@Inject(method = "removed", at = @At("HEAD"))
@@ -33,6 +33,6 @@ public class SignEditScreenMixin {
 			return;
 		}
 
-		FormattingUtils.replaceBuiltInPrefixWithConfiguredPrefix(text);
+		FormattingUtils.replaceBuiltInPrefixWithConfiguredPrefix(messages);
 	}
 }

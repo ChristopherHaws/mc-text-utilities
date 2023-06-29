@@ -6,6 +6,9 @@ import io.chaws.textutilities.TextUtilities;
 import io.chaws.textutilities.config.TextUtilitiesConfig;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.fabricmc.fabric.api.event.player.UseEntityCallback;
+
+import net.minecraft.util.math.Vec3i;
+
 import org.jetbrains.annotations.Nullable;
 import net.minecraft.block.Block;
 import net.minecraft.block.entity.BlockEntity;
@@ -86,8 +89,15 @@ public class ClickThroughHandler {
 		}
 
 		//HACK: Need to find a better way of detecting the side of the entity that was clicked
+		var exactHitPosition = entityHitResult.getPos();
+		var hitPosition = new Vec3i(
+			(int)Math.round(exactHitPosition.x),
+			(int)Math.round(exactHitPosition.y),
+			(int)Math.round(exactHitPosition.z)
+		);
+
 		var clickedSide = player.getHorizontalFacing().getOpposite();
-		var clickedEntityPos = new BlockPos(entityHitResult.getPos());
+		var clickedEntityPos = new BlockPos(hitPosition);
 
 		return tryClickThrough(world, player, config, clickedEntityPos, clickedSide, hand)
 			? ActionResult.SUCCESS

@@ -55,10 +55,8 @@ public class SignEditHandler {
 			return ActionResult.PASS;
 		}
 
-		signBlock.setEditable(true);
-
-		if (signBlock.isEditable()) {
-			player.openEditSignScreen(signBlock);
+		if (!signBlock.isWaxed()) {
+			player.openEditSignScreen(signBlock, true);
 		} else {
 			player.sendMessage(Text.literal("Sign is not editable"), true);
 		}
