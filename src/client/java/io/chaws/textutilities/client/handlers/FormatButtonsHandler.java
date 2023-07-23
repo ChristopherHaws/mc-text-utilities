@@ -3,6 +3,8 @@ package io.chaws.textutilities.client.handlers;
 import com.google.common.collect.ImmutableList;
 import io.chaws.textutilities.TextUtilities;
 import io.chaws.textutilities.client.mixin.AnvilScreenAccessor;
+import java.util.ArrayList;
+import java.util.List;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
@@ -16,12 +18,10 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Environment(EnvType.CLIENT)
 public class FormatButtonsHandler {
-	private final static ImmutableList<Formatting> colorFormattings = ImmutableList.of(
+
+	private static final ImmutableList<Formatting> colorFormattings = ImmutableList.of(
 		Formatting.BLACK,
 		Formatting.DARK_GRAY,
 		Formatting.DARK_BLUE,
@@ -40,7 +40,7 @@ public class FormatButtonsHandler {
 		Formatting.WHITE
 	);
 
-	private final static ImmutableList<Formatting> modifierFormattings = ImmutableList.of(
+	private static final ImmutableList<Formatting> modifierFormattings = ImmutableList.of(
 		Formatting.BOLD,
 		Formatting.ITALIC,
 		Formatting.UNDERLINE,
@@ -57,6 +57,8 @@ public class FormatButtonsHandler {
 
 	private static void onScreenOpened(Screen screen) {
 		var config = TextUtilities.getConfig();
+
+		// TODO: Make the x and y offset of the screens configurable.
 		var xOffsetFromCenter = 0;
 		var yOffset = 0;
 
@@ -81,7 +83,10 @@ public class FormatButtonsHandler {
 
 			xOffsetFromCenter += 85;
 			yOffset += (screen.height / 2) - 80;
-			((AnvilScreenAccessor)anvilScreen).getNameField().setRenderTextProvider((abc, def) ->
+
+			var anvilScreenAccessor = (AnvilScreenAccessor) (Object) screen;
+			var nameField = anvilScreenAccessor.getNameField();
+			nameField.setRenderTextProvider((abc, def) ->
 				Text.literal(abc).asOrderedText()
 			);
 		} else {
@@ -110,7 +115,13 @@ public class FormatButtonsHandler {
 		screenButtons.addAll(modifierButtons);
 	}
 
-	private static List<ButtonWidget> getFormatButtons(Screen screen, List<Formatting> formats, int x, int yOffset, int rows) {
+	private static List<ButtonWidget> getFormatButtons(
+		Screen screen,
+		List<Formatting> formats,
+		int x,
+		int yOffset,
+		int rows
+	) {
 		List<ButtonWidget> list = new ArrayList<>();
 		var i = 0;
 		var gap = 0;
@@ -120,14 +131,16 @@ public class FormatButtonsHandler {
 			var buttonX = x + (i / rows + 1) * (buttonSize + gap);
 			var buttonY = i % rows * (buttonSize + gap) + yOffset;
 
-			list.add(getFormatButton(
-				screen,
-				buttonX,
-				buttonY,
-				buttonSize,
-				buttonSize,
-				formatting
-			));
+			list.add(
+				getFormatButton(
+					screen,
+					buttonX,
+					buttonY,
+					buttonSize,
+					buttonSize,
+					formatting
+				)
+			);
 
 			i++;
 		}
@@ -145,27 +158,35 @@ public class FormatButtonsHandler {
 	) {
 		if (formatting.isModifier() || formatting == Formatting.RESET) {
 			var label = formatting.toString().concat(formatting.getName());
-			return ButtonWidget.builder(
+			return ButtonWidget
+				.builder(
 					Text.literal(label),
 					cod -> {
 						screen.charTyped(Formatting.FORMATTING_CODE_PREFIX, 0);
 						screen.charTyped(formatting.getCode(), 0);
-					})
+					}
+				)
 				.position(buttonX, buttonY)
 				.size(buttonWidth * 4, buttonHeight)
 				.tooltip(Tooltip.of(Text.literal(label)))
 				.build();
 		}
 
-		return ButtonWidget.builder(
-			Text.literal(formatting.toString().concat("⬛")),
-			cod -> {
-				screen.charTyped(Formatting.FORMATTING_CODE_PREFIX, 0);
-				screen.charTyped(formatting.getCode(), 0);
-			})
+		return ButtonWidget
+			.builder(
+				Text.literal(formatting.toString().concat("⬛")),
+				cod -> {
+					screen.charTyped(Formatting.FORMATTING_CODE_PREFIX, 0);
+					screen.charTyped(formatting.getCode(), 0);
+				}
+			)
 			.position(buttonX, buttonY)
 			.size(buttonWidth, buttonHeight)
-			.tooltip(Tooltip.of(Text.literal(formatting.toString().concat(formatting.getName()))))
+			.tooltip(
+				Tooltip.of(
+					Text.literal(formatting.toString().concat(formatting.getName()))
+				)
+			)
 			.build();
 	}
 }

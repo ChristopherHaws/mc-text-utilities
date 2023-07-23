@@ -1,0 +1,6 @@
+{
+	"editorconfig": true,
+	"useTabs": true,
+	"tabSize": 4,
+	"trailingComma": "all"
+}

@@ -10,6 +10,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Environment(EnvType.CLIENT)
 @Mixin(AnvilScreen.class)
 public interface AnvilScreenAccessor {
-	@Accessor
-	TextFieldWidget getNameField();
+	@Accessor("nameField")
+	abstract TextFieldWidget getNameField();
 }

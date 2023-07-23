@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class TextUtilities implements ModInitializer {
-	@SuppressWarnings("unused")
 	public static final Logger logger = LoggerFactory.getLogger("textutilities");
 
 	public static TextUtilitiesConfig getConfig() {
