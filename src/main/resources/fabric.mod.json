@@ -27,7 +27,11 @@
 		]
 	},
 	"mixins": [
-		"textutilities.mixins.json"
+		"textutilities.mixins.json",
+		{
+			"config": "textutilities.client.mixins.json",
+			"environment": "client"
+		}
 	],
 	"depends": {
 		"fabricloader": ">=0.14",

@@ -2,7 +2,6 @@ package io.chaws.textutilities.client.handlers;
 
 import com.google.common.collect.ImmutableList;
 import io.chaws.textutilities.TextUtilities;
-import io.chaws.textutilities.client.mixin.AnvilScreenAccessor;
 import java.util.ArrayList;
 import java.util.List;
 import net.fabricmc.api.EnvType;
@@ -83,12 +82,6 @@ public class FormatButtonsHandler {
 
 			xOffsetFromCenter += 85;
 			yOffset += (screen.height / 2) - 80;
-
-			var anvilScreenAccessor = (AnvilScreenAccessor) (Object) screen;
-			var nameField = anvilScreenAccessor.getNameField();
-			nameField.setRenderTextProvider((abc, def) ->
-				Text.literal(abc).asOrderedText()
-			);
 		} else {
 			// Not a supported screen.
 			return;

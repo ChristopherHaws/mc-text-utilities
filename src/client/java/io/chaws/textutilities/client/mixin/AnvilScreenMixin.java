@@ -6,31 +6,50 @@ import java.util.Optional;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.screen.ingame.AnvilScreen;
-//import net.minecraft.client.gui.widget.TextFieldWidget;
+import net.minecraft.client.gui.screen.ingame.ForgingScreen;
+import net.minecraft.client.gui.widget.TextFieldWidget;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.screen.AnvilScreenHandler;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.text.StringVisitable;
 import net.minecraft.text.Style;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 import org.spongepowered.asm.mixin.Mixin;
-//import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.*;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Environment(EnvType.CLIENT)
 @Mixin(AnvilScreen.class)
-public class AnvilScreenMixin {
+public abstract class AnvilScreenMixin
+	extends ForgingScreen<AnvilScreenHandler> {
 
-	//@Shadow private TextFieldWidget nameField;
+	public AnvilScreenMixin(
+		AnvilScreenHandler handler,
+		PlayerInventory playerInventory,
+		Text title,
+		Identifier texture
+	) {
+		super(handler, playerInventory, title, texture);
+	}
+
+	@Shadow
+	private TextFieldWidget nameField;
 
 	private AnvilScreen getAnvilScreen() {
 		return ((AnvilScreen) (Object) this);
 	}
 
-	private AnvilScreenAccessor getAnvilScreenAccessor() {
-		return ((AnvilScreenAccessor) (Object) this);
+	@Inject(method = "setup", at = @At(value = "TAIL"))
+	protected void setup(CallbackInfo ci) {
+		// Defaults to: OrderedText.styledForwardsVisitedString(string, Style.EMPTY);
+		this.nameField.setRenderTextProvider((abc, def) ->
+				Text.literal(abc).asOrderedText()
+			);
 	}
 
 	@Inject(method = "keyPressed", at = @At("HEAD"))
@@ -44,8 +63,7 @@ public class AnvilScreenMixin {
 			return;
 		}
 
-		var nameField = this.getAnvilScreenAccessor().getNameField();
-		this.getAnvilScreen().setFocused(nameField);
+		this.getAnvilScreen().setFocused(this.nameField);
 	}
 
 	@Inject(method = "onSlotUpdate", at = @At(value = "TAIL"))
@@ -121,8 +139,7 @@ public class AnvilScreenMixin {
 		);
 
 		var formattedName = sb.toString();
-		var nameField = this.getAnvilScreenAccessor().getNameField();
-		nameField.setText(formattedName);
+		this.nameField.setText(formattedName);
 	}
 
 	//	@ModifyArg(method = "onRenamed", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayNetworkHandler;sendPacket(Lnet/minecraft/network/Packet;)V"))

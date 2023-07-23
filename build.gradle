@@ -19,6 +19,8 @@ base {
 	archivesName = "${project.archives_base_name}-fabric"
 }
 
+
+
 loom {
 	splitEnvironmentSourceSets()
 
@@ -29,14 +31,30 @@ loom {
 		}
 	}
 
+	// https://github.com/SpongePowered/Mixin/wiki/Mixin-Java-System-Properties
+	def applyCommonRunConfig = { run ->
+        // run.runDir = "run/${project.minecraft_version}/${run.name}"
+        // run.vmArg('-XX:+ShowCodeDetailsInExceptionMessages')
+		run.property("mixin.debug.export", "true")
+		run.property("mixin.debug.export.decompile", "true")
+		run.property("mixin.dumpTargetOnFailure", "true")
+		run.property("mixin.debug.verify", "true")
+		run.property("mixin.debug.verbose", "true")
+		run.property("mixin.env.remapRefMap", "true")
+		run.property("mixin.checks", "true")
+		run.property("mixin.hotSwap", "true")
+    }
+
 	runs {
 		client {
 			runDir = "run/${project.minecraft_version}/client"
-            vmArg "-XX:+ShowCodeDetailsInExceptionMessages"
+			vmArg "-XX:+ShowCodeDetailsInExceptionMessages"
+			applyCommonRunConfig(client)
 		}
 		server {
 			runDir = "run/${project.minecraft_version}/server"
-            vmArg "-XX:+ShowCodeDetailsInExceptionMessages"
+			vmArg "-XX:+ShowCodeDetailsInExceptionMessages"
+			applyCommonRunConfig(server)
 		}
 	}
 }
