@@ -9,9 +9,10 @@ plugins {
 
 String buildNumber = System.getenv("GITHUB_RUN_NUMBER")
 Boolean appendBuildNumber = System.getenv("APPEND_BUILD_NUMBER") == "true" && buildNumber != null
+String modVersion = System.getenv("MOD_VERSION") ?: "0.0.1"
 
 group = project.maven_group
-version = project.mod_version +
+version = modVersion +
         (appendBuildNumber ? "-build${buildNumber}" : "") +
         "+${project.minecraft_version}"
 
@@ -134,7 +135,6 @@ processResources {
     properties.put("version", project.version)
     properties.put("mod_id", project.mod_id)
     properties.put("mod_name", project.mod_name)
-    properties.put("mod_version", project.mod_version)
     properties.put("loader_version", project.loader_version)
     properties.put("fabric_version", project.fabric_version)
     properties.put("minecraft_version", project.minecraft_version)

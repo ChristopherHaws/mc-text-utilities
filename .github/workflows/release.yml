@@ -85,6 +85,8 @@ jobs:
 
       - name: build
         run: ./gradlew build
+        env:
+          MOD_VERSION: ${{ steps.version.outputs.release }}
 
       - name: capture build artifacts
         uses: actions/upload-artifact@v3
