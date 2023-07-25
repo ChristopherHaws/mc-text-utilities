@@ -18,9 +18,13 @@ ij_continuation_indent_size = 4
 ij_java_imports_layout = $*,|,java.**,|,javax.**,|,*,|,net.minecraft.**,|,net.fabricmc.**
 ij_java_class_count_to_use_import_on_demand = 999
 
-[*.json]
+[*.{json,jsonc,json5}]
 indent_style = tab
 indent_size = 4
+
+[*.{yaml,yml}]
+indent_style = space
+indent_size = 2
 
 [*.properties]
 indent_style = space

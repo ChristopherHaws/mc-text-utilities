@@ -21,6 +21,9 @@
 		"editor.wordWrap": "on"
 	},
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"files.associations": {
+		".github/workflows/*.yml": "github-actions-workflow"
+	},
 	"java.configuration.updateBuildConfiguration": "automatic",
 	// Disable the java formatter because we are using prettier
 	"java.format.enabled": false,
