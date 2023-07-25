@@ -27,16 +27,28 @@
 		]
 	},
 	"mixins": [
-		"textutilities.mixins.json"
+		"textutilities.mixins.json",
+		{
+			"config": "textutilities.client.mixins.json",
+			"environment": "client"
+		}
 	],
+	"includes": {
+		"cloth-config": "*"
+	},
 	"depends": {
 		"fabricloader": ">=0.14",
 		"fabric": "*",
+		"fabric-api": "*",
 		"minecraft": ">=1.20",
 		"java": ">=17"
 	},
 	"suggests": {
 		"modmenu": ">=5"
+	},
+	"conflicts": {
+		"clickthrough": "*",
+		"clickthrough2.0": "*"
 	},
 	"custom": {
 		"modmanager": {

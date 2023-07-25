@@ -1,42 +1,58 @@
 plugins {
 	// https://fabricmc.net/wiki/documentation:fabric_loom
-	id 'fabric-loom' version '1.0.17'
-    // Quiltflower is a better decompiler
-    id "io.github.juuxel.loom-quiltflower" version "1.8.0"
+	id 'fabric-loom' version '1.3-SNAPSHOT'
+    // https://plugins.gradle.org/plugin/io.github.juuxel.loom-vineflower
+    id 'io.github.juuxel.loom-vineflower' version '1.11.0'
 	id 'maven-publish'
 	id 'idea'
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
-
 String buildNumber = System.getenv("GITHUB_RUN_NUMBER")
 Boolean appendBuildNumber = System.getenv("APPEND_BUILD_NUMBER") == "true" && buildNumber != null
 
+group = project.maven_group
 version = project.mod_version +
         (appendBuildNumber ? "-build${buildNumber}" : "") +
         "+${project.minecraft_version}"
-archivesBaseName = "${project.archives_base_name}-fabric"
-group = project.maven_group
+
+base {
+	archivesName = "${project.archives_base_name}-fabric"
+}
 
 loom {
 	splitEnvironmentSourceSets()
 
 	mods {
-		textutilities {
+		"textutilities" {
 			sourceSet sourceSets.main
 			sourceSet sourceSets.client
 		}
 	}
 
+	// https://github.com/SpongePowered/Mixin/wiki/Mixin-Java-System-Properties
+	def applyCommonRunConfig = { run ->
+        // run.runDir = "run/${project.minecraft_version}/${run.name}"
+        // run.vmArg('-XX:+ShowCodeDetailsInExceptionMessages')
+		run.property("mixin.debug.export", "true")
+		run.property("mixin.debug.export.decompile", "true")
+		run.property("mixin.dumpTargetOnFailure", "true")
+		run.property("mixin.debug.verify", "true")
+		run.property("mixin.debug.verbose", "true")
+		run.property("mixin.env.remapRefMap", "true")
+		run.property("mixin.checks", "true")
+		run.property("mixin.hotSwap", "true")
+    }
+
 	runs {
 		client {
 			runDir = "run/${project.minecraft_version}/client"
-            vmArg "-XX:+ShowCodeDetailsInExceptionMessages"
+			vmArg "-XX:+ShowCodeDetailsInExceptionMessages"
+			applyCommonRunConfig(client)
 		}
 		server {
 			runDir = "run/${project.minecraft_version}/server"
-            vmArg "-XX:+ShowCodeDetailsInExceptionMessages"
+			vmArg "-XX:+ShowCodeDetailsInExceptionMessages"
+			applyCommonRunConfig(server)
 		}
 	}
 }
@@ -98,7 +114,7 @@ dependencies {
 	testImplementation(sourceSets.client.output)
 
 	// Mods that are useful for local development
-	devMods(dependencies)
+	//devMods(dependencies)
 }
 
 // mods that can be uncommented to test in development
@@ -124,7 +140,7 @@ processResources {
     properties.put("minecraft_version", project.minecraft_version)
     properties.put("java_version", sourceCompatibility)
 
-    properties.forEach((k, v) -> inputs.property(k, v))
+	properties.each { k, v -> inputs.property(k, v) }
 
     filesMatching("fabric.mod.json") {
         expand properties
@@ -139,10 +155,13 @@ tasks.withType(JavaCompile).configureEach {
     it.options.encoding = "UTF-8"
 
 	// Minecraft 1.18 (1.18-pre2) upwards uses Java 17.
-	it.options.release.set(17)
+	it.options.release = 17
 }
 
 java {
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
+	
 	// Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
 	// if it is present.
 	// If you remove this line, sources will not be generated.
@@ -151,7 +170,7 @@ java {
 
 jar {
 	from("LICENSE") {
-		rename { "${it}_${project.archivesBaseName}"}
+		rename { "${it}_${project.base.archivesName.get()}"}
 	}
 }
 

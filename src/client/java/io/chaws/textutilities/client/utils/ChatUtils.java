@@ -3,7 +3,6 @@ package io.chaws.textutilities.client.utils;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.text.Text;
 
-@SuppressWarnings("unused")
 public class ChatUtils {
 	public static void sendMessage(String message) {
 		sendMessage(Text.of(message));

@@ -1,0 +1,55 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "java",
+			"name": "Minecraft Client",
+			"request": "launch",
+			"cwd": "${workspaceFolder}/run/1.20.1/client",
+			"console": "integratedTerminal",
+			"stopOnEntry": false,
+			"mainClass": "net.fabricmc.devlaunchinjector.Main",
+			"vmArgs": [
+				"-Dfabric.dli.config=${workspaceFolder}/.gradle/loom-cache/launch.cfg",
+				"-Dfabric.dli.env=client -XX:+ShowCodeDetailsInExceptionMessages",
+				"-Dmixin.debug.export=true",
+				"-Dmixin.debug.export.decompile=true",
+				"-Dmixin.dumpTargetOnFailure=true",
+				"-Dmixin.debug.verify=true",
+				"-Dmixin.debug.verbose=true",
+				"-Dmixin.env.remapRefMap=true",
+				"-Dmixin.checks=true",
+				"-Dmixin.hotSwap=true",
+				"-Dfabric.dli.main=net.fabricmc.loader.impl.launch.knot.KnotClient"
+			],
+			"args": "",
+			"env": {},
+			"projectName": "mc-text-utilities"
+		},
+		{
+			"type": "java",
+			"name": "Minecraft Server",
+			"request": "launch",
+			"cwd": "${workspaceFolder}/run/1.20.1/server",
+			"console": "integratedTerminal",
+			"stopOnEntry": false,
+			"mainClass": "net.fabricmc.devlaunchinjector.Main",
+			"vmArgs": [
+				"-Dfabric.dli.config=${workspaceFolder}/.gradle/loom-cache/launch.cfg",
+				"-Dfabric.dli.env=server -XX:+ShowCodeDetailsInExceptionMessages",
+				"-Dmixin.debug.export=true",
+				"-Dmixin.debug.export.decompile=true",
+				"-Dmixin.dumpTargetOnFailure=true",
+				"-Dmixin.debug.verify=true",
+				"-Dmixin.debug.verbose=true",
+				"-Dmixin.env.remapRefMap=true",
+				"-Dmixin.checks=true",
+				"-Dmixin.hotSwap=true",
+				"-Dfabric.dli.main=net.fabricmc.loader.impl.launch.knot.KnotServer"
+			],
+			"args": "nogui",
+			"env": {},
+			"projectName": "mc-text-utilities"
+		}
+	]
+}

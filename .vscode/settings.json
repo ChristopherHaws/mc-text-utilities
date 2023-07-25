@@ -1,0 +1,62 @@
+{
+	"[ignore]": {
+		"editor.defaultFormatter": "foxundermoon.shell-format"
+	},
+	"[java]": {
+		"editor.defaultFormatter": "hyperproof.vscode-ext-prettier-java"
+	},
+	"[markdown]": {
+		"cSpell.advanced.feature.useReferenceProviderRemove": "/^#+\\s/",
+		"cSpell.advanced.feature.useReferenceProviderWithRename": true,
+		"cSpell.fixSpellingWithRenameProvider": true,
+		"diffEditor.ignoreTrimWhitespace": false,
+		"editor.defaultFormatter": "yzhang.markdown-all-in-one",
+		"editor.quickSuggestions": {
+			"comments": "off",
+			"other": "off",
+			"strings": "off"
+		},
+		"editor.unicodeHighlight.ambiguousCharacters": false,
+		"editor.unicodeHighlight.invisibleCharacters": false,
+		"editor.wordWrap": "on"
+	},
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"files.associations": {
+		".github/workflows/*.yml": "github-actions-workflow"
+	},
+	"java.configuration.updateBuildConfiguration": "automatic",
+	// Disable the java formatter because we are using prettier
+	"java.format.enabled": false,
+	"java.maxConcurrentBuilds": 1,
+	"todo-tree.highlights.defaultHighlight": {
+		"background": "#000000",
+		"fontWeight": "900",
+		"opacity": 0
+	},
+	"todohighlight.defaultStyle": {
+		"backgroundColor": "editor.background"
+	},
+	// https://code.visualstudio.com/api/references/theme-color
+	"todohighlight.keywords": [
+		{
+			"backgroundColor": "editor.background",
+			"color": "yellow",
+			"text": "TODO:"
+		},
+		{
+			"backgroundColor": "editor.background",
+			"color": "orange",
+			"text": "FIXME:"
+		},
+		{
+			"backgroundColor": "editor.background",
+			"color": "red",
+			"text": "HACK:"
+		},
+		{
+			"backgroundColor": "editor.background",
+			"color": "#00FF00",
+			"text": "HINT:"
+		}
+	]
+}
