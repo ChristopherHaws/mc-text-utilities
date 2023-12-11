@@ -92,7 +92,7 @@ public abstract class AnvilScreenMixin
 		}
 
 		var json = nameElement.asString();
-		var text = Text.Serializer.fromJson(json);
+		var text = Text.Serialization.fromJson(json);
 		if (text == null) {
 			return;
 		}
