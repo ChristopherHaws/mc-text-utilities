@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 @Environment(EnvType.CLIENT)
 @Mixin(TextFieldWidget.class)
 public class TextFieldWidgetMixin {
-	@Redirect(method = "renderButton", at = @At(value = "INVOKE", target = "Ljava/lang/String;substring(I)Ljava/lang/String;", ordinal = 1))
+	@Redirect(method = "renderWidget", at = @At(value = "INVOKE", target = "Ljava/lang/String;substring(I)Ljava/lang/String;", ordinal = 1))
 	private String appendFormatting(String string, int i) {
 		var strings = FormattingUtils.splitWithFormatting(string, i);
 
