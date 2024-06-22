@@ -89,12 +89,12 @@ jobs:
           MOD_VERSION: ${{ steps.version.outputs.release }}
 
       - name: capture build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: artifacts
           path: build/libs/
 
-      - uses: Kir-Antipov/mc-publish@v3.2
+      - uses: Kir-Antipov/mc-publish@v3.3
         with:
           name: v${{ steps.version.outputs.release }} for ${{ steps.version.outputs.build }}
           version: ${{ steps.version.outputs.release }}+${{ steps.version.outputs.build }}
@@ -103,7 +103,7 @@ jobs:
           loaders: |
             fabric
           game-versions: |
-            1.20.1
+            >=1.20.4
           java: |
             17
 
