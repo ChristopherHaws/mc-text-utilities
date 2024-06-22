@@ -1,21 +1,25 @@
 package io.chaws.textutilities.client.handlers;
 
-import com.google.common.collect.ImmutableList;
-import io.chaws.textutilities.TextUtilities;
 import java.util.ArrayList;
 import java.util.List;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
-import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
-import net.fabricmc.fabric.api.client.screen.v1.Screens;
+
+import com.google.common.collect.ImmutableList;
+import io.chaws.textutilities.TextUtilities;
+
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.screen.ingame.AnvilScreen;
 import net.minecraft.client.gui.screen.ingame.BookEditScreen;
+import net.minecraft.client.gui.screen.ingame.HangingSignEditScreen;
 import net.minecraft.client.gui.screen.ingame.SignEditScreen;
 import net.minecraft.client.gui.tooltip.Tooltip;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+
+import net.fabricmc.api.EnvType;
+import net.fabricmc.api.Environment;
+import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
+import net.fabricmc.fabric.api.client.screen.v1.Screens;
 
 @Environment(EnvType.CLIENT)
 public class FormatButtonsHandler {
@@ -61,7 +65,8 @@ public class FormatButtonsHandler {
 		var xOffsetFromCenter = 0;
 		var yOffset = 0;
 
-		if (screen instanceof SignEditScreen) {
+		if (screen instanceof SignEditScreen ||
+			screen instanceof HangingSignEditScreen) {
 			if (!config.signFormattingEnabled) {
 				return;
 			}
