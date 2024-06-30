@@ -80,7 +80,7 @@ public class FormatButtonsHandler {
 
 			xOffsetFromCenter += 70;
 			yOffset += 20;
-		} else if (screen instanceof AnvilScreen anvilScreen) {
+		} else if (screen instanceof AnvilScreen) {
 			if (!config.anvilFormattingEnabled) {
 				return;
 			}
