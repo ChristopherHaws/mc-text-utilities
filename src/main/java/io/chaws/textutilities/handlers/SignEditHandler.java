@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Items;
+import net.minecraft.item.SignChangingItem;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -43,11 +44,8 @@ public class SignEditHandler {
 			return ActionResult.PASS;
 		}
 
-		// Dyes and Ink Sacs can be applied to signs directly when they are in the main hand
-		if (isHolding(player, Hand.MAIN_HAND, Items.INK_SAC) ||
-			isHolding(player, Hand.MAIN_HAND, Items.GLOW_INK_SAC) ||
-			isHoldingDye(player, Hand.MAIN_HAND)
-		) {
+		if (signBlock.isWaxed()) {
+			player.sendMessage(Text.literal("Waxed signs cannot be edited."), true);
 			return ActionResult.PASS;
 		}
 
@@ -55,12 +53,21 @@ public class SignEditHandler {
 			return ActionResult.PASS;
 		}
 
-		if (!signBlock.isWaxed()) {
-			player.openEditSignScreen(signBlock, true);
-		} else {
-			player.sendMessage(Text.literal("Sign is not editable"), true);
+		// Dyes, Ink Sacs, etc can be applied to signs directly when they are in the main hand
+		if (isHoldingSignChangingItem(player, Hand.MAIN_HAND)) {
+			return ActionResult.PASS;
 		}
 
+		var editorId = signBlock.getEditor();
+		var playerId = player.getUuid();
+
+		if (editorId != null && editorId != playerId) {
+			player.sendMessage(Text.literal("Sign is being edited by someone else."), true);
+			return ActionResult.FAIL;
+		}
+
+		signBlock.setEditor(playerId);
+		player.openEditSignScreen(signBlock, true);
 		return ActionResult.SUCCESS;
 	}
 }

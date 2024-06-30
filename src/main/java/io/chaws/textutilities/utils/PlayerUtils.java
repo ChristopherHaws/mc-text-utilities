@@ -27,4 +27,8 @@ public class PlayerUtils {
 	public static boolean isHoldingDye(PlayerEntity player, Hand hand) {
 		return isHolding(player, hand, x -> x.getItem() instanceof DyeItem);
 	}
+
+	public static boolean isHoldingSignChangingItem(PlayerEntity player, Hand hand) {
+		return isHolding(player, hand, x -> x.getItem() instanceof SignChangingItem);
+	}
 }
