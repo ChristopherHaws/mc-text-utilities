@@ -4,8 +4,6 @@ import io.chaws.textutilities.TextUtilities;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
 import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.Items;
-import net.minecraft.item.SignChangingItem;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -25,6 +23,7 @@ public class SignEditHandler {
 		final Hand hand,
 		final BlockHitResult hitResult
 	) {
+		// We only want to listen to the server side event
 		if (world.isClient) {
 			return ActionResult.PASS;
 		}

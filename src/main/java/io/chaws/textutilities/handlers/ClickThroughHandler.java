@@ -148,9 +148,8 @@ public class ClickThroughHandler {
 			// Dyes and Ink Sacs can be applied to signs directly when they are in the main hand
 			return
 				config.signClickThroughEnabled &&
-				!isHolding(player, Hand.MAIN_HAND, Items.INK_SAC) &&
-				!isHolding(player, Hand.MAIN_HAND, Items.GLOW_INK_SAC) &&
-				!isHoldingDye(player, Hand.MAIN_HAND) &&
+				!isHoldingSignChangingItem(player, Hand.MAIN_HAND) &&
+				// TODO: Remove this once we know sign entity inherits SignChangingItem
 				!isHoldingSign(player, Hand.MAIN_HAND);
 		}
 
