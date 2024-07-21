@@ -1,0 +1,57 @@
+{
+	"folders": [
+		{
+			"name": "workspace",
+			"path": "."
+		},
+		{
+			"name": "fabric-1.20.4",
+			"path": "./modules/fabric-1.20.4"
+		},
+		{
+			"name": "fabric-1.21.0",
+			"path": "./modules/fabric-1.21.0"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			".github/workflows/*.yml": "github-actions-workflow"
+		},
+		"java.configuration.updateBuildConfiguration": "automatic",
+		"java.format.enabled": false,
+		"java.maxConcurrentBuilds": 4,
+		"java.configuration.detectJdksAtStart": true,
+		"java.gradle.buildServer.enabled": "on",
+		"java.references.includeDecompiledSources": true,
+		"todo-tree.highlights.defaultHighlight": {
+			"background": "#000000",
+			"fontWeight": "900",
+			"opacity": 0
+		},
+		"todohighlight.defaultStyle": {
+			"backgroundColor": "editor.background"
+		},
+		"todohighlight.keywords": [
+			{
+				"backgroundColor": "editor.background",
+				"color": "yellow",
+				"text": "TODO:"
+			},
+			{
+				"backgroundColor": "editor.background",
+				"color": "orange",
+				"text": "FIXME:"
+			},
+			{
+				"backgroundColor": "editor.background",
+				"color": "red",
+				"text": "HACK:"
+			},
+			{
+				"backgroundColor": "editor.background",
+				"color": "#00FF00",
+				"text": "HINT:"
+			}
+		]
+	}
+}

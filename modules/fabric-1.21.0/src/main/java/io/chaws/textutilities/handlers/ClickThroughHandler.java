@@ -50,7 +50,7 @@ public class ClickThroughHandler {
 		var clickedSide = hitResult.getSide();
 		var clickedBlockPos = hitResult.getBlockPos();
 
-		return tryClickThrough(world, player, config, clickedBlockPos, clickedSide, hand)
+		return tryClickThrough(world, player, config, clickedBlockPos, clickedSide)
 			? ActionResult.SUCCESS
 			: ActionResult.PASS;
 	}
@@ -79,11 +79,10 @@ public class ClickThroughHandler {
 		var entityFacing = entity.getHorizontalFacing();
 
 		if (entity instanceof AbstractDecorationEntity decorationEntity) {
-			var decorationBlockPos = decorationEntity.getDecorationBlockPos().add(
-				entityFacing.getOpposite().getVector()
-			);
+			var attachedBlockPos = decorationEntity.getAttachedBlockPos();
+			// .add(entityFacing.getOpposite().getVector());
 
-			useBlock(world, player, decorationBlockPos, entityFacing, hand);
+			useBlock(world, player, attachedBlockPos, entityFacing);
 
 			return ActionResult.SUCCESS;
 		}
@@ -99,7 +98,7 @@ public class ClickThroughHandler {
 		var clickedSide = player.getHorizontalFacing().getOpposite();
 		var clickedEntityPos = new BlockPos(hitPosition);
 
-		return tryClickThrough(world, player, config, clickedEntityPos, clickedSide, hand)
+		return tryClickThrough(world, player, config, clickedEntityPos, clickedSide)
 			? ActionResult.SUCCESS
 			: ActionResult.PASS;
 	}
@@ -109,8 +108,7 @@ public class ClickThroughHandler {
 		final PlayerEntity player,
 		final TextUtilitiesConfig config,
 		final BlockPos clickedBlockPos,
-		final Direction clickedBlockSide,
-		final Hand hand
+		final Direction clickedBlockSide
 	) {
 		var playerFacing = player.getHorizontalFacing().getVector();
 		var attachedBlockPos = clickedBlockPos.add(playerFacing);
@@ -118,13 +116,13 @@ public class ClickThroughHandler {
 
 		var blockEntity = world.getBlockEntity(clickedBlockPos);
 		if (blockEntity != null && canClickThroughBlockEntity(player, config, blockEntity)) {
-			useBlock(world, player, attachedBlockPos, clickedBlockSide, hand);
+			useBlock(world, player, attachedBlockPos, clickedBlockSide);
 			return true;
 		}
 
 		var block = blockState.getBlock();
 		if (canClickThroughBlock(config, block)) {
-			useBlock(world, player, attachedBlockPos, clickedBlockSide, hand);
+			useBlock(world, player, attachedBlockPos, clickedBlockSide);
 			return true;
 		}
 
@@ -190,8 +188,7 @@ public class ClickThroughHandler {
 		final World world,
 		final PlayerEntity player,
 		final BlockPos attachedBlockPos,
-		final Direction clickedSide,
-		final Hand hand
+		final Direction clickedSide
 	) {
 		var attachedBlockState = world.getBlockState(attachedBlockPos);
 		var attachedBlockHitResult = new BlockHitResult(
@@ -201,6 +198,6 @@ public class ClickThroughHandler {
 			false
 		);
 
-		attachedBlockState.onUse(world, player, hand, attachedBlockHitResult);
+		attachedBlockState.onUse(world, player, attachedBlockHitResult);
 	}
 }

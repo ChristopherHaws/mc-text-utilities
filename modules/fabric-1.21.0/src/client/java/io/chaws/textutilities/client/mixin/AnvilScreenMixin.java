@@ -66,81 +66,82 @@ public abstract class AnvilScreenMixin
 		this.getAnvilScreen().setFocused(this.nameField);
 	}
 
-	@Inject(method = "onSlotUpdate", at = @At(value = "TAIL"))
-	private void onSlotUpdate(
-		ScreenHandler handler,
-		int slotId,
-		ItemStack stack,
-		CallbackInfo ci
-	) {
-		if (!TextUtilities.getConfig().anvilFormattingEnabled) {
-			return;
-		}
+	// FIXME: This type has changed, need to fix...
+	// @Inject(method = "onSlotUpdate", at = @At(value = "TAIL"))
+	// private void onSlotUpdate(
+	// 	ScreenHandler handler,
+	// 	int slotId,
+	// 	ItemStack stack,
+	// 	CallbackInfo ci
+	// ) {
+	// 	if (!TextUtilities.getConfig().anvilFormattingEnabled) {
+	// 		return;
+	// 	}
 
-		if (slotId != 0) {
-			return;
-		}
+	// 	if (slotId != 0) {
+	// 		return;
+	// 	}
 
-		var displayElement = stack.getSubNbt(ItemStack.DISPLAY_KEY);
-		if (displayElement == null) {
-			return;
-		}
+	// 	var displayElement = stack.getSubNbt(ItemStack.DISPLAY_KEY);
+	// 	if (displayElement == null) {
+	// 		return;
+	// 	}
 
-		var nameElement = displayElement.get(ItemStack.NAME_KEY);
-		if (nameElement == null) {
-			return;
-		}
+	// 	var nameElement = displayElement.get(ItemStack.NAME_KEY);
+	// 	if (nameElement == null) {
+	// 		return;
+	// 	}
 
-		var json = nameElement.asString();
-		var text = Text.Serialization.fromJson(json);
-		if (text == null) {
-			return;
-		}
+	// 	var json = nameElement.asString();
+	// 	var text = Text.Serialization.fromJson(json);
+	// 	if (text == null) {
+	// 		return;
+	// 	}
 
-		var sb = new StringBuilder();
-		text.visit(
-			(StringVisitable.StyledVisitor<String>) (style, asString) -> {
-				var color = style.getColor();
-				if (color != null) {
-					var formatting = Formatting.byName(color.getName());
-					if (formatting != null) {
-						sb.append(formatting);
-					}
-				}
+	// 	var sb = new StringBuilder();
+	// 	text.visit(
+	// 		(StringVisitable.StyledVisitor<String>) (style, asString) -> {
+	// 			var color = style.getColor();
+	// 			if (color != null) {
+	// 				var formatting = Formatting.byName(color.getName());
+	// 				if (formatting != null) {
+	// 					sb.append(formatting);
+	// 				}
+	// 			}
 
-				if (style.isBold()) {
-					sb.append(Formatting.BOLD);
-				}
+	// 			if (style.isBold()) {
+	// 				sb.append(Formatting.BOLD);
+	// 			}
 
-				if (style.isItalic()) {
-					sb.append(Formatting.ITALIC);
-				}
+	// 			if (style.isItalic()) {
+	// 				sb.append(Formatting.ITALIC);
+	// 			}
 
-				if (style.isUnderlined()) {
-					sb.append(Formatting.UNDERLINE);
-				}
+	// 			if (style.isUnderlined()) {
+	// 				sb.append(Formatting.UNDERLINE);
+	// 			}
 
-				if (style.isStrikethrough()) {
-					sb.append(Formatting.STRIKETHROUGH);
-				}
+	// 			if (style.isStrikethrough()) {
+	// 				sb.append(Formatting.STRIKETHROUGH);
+	// 			}
 
-				if (style.isObfuscated()) {
-					sb.append(Formatting.OBFUSCATED);
-				}
+	// 			if (style.isObfuscated()) {
+	// 				sb.append(Formatting.OBFUSCATED);
+	// 			}
 
-				if (style.isEmpty()) {
-					sb.append(Formatting.RESET);
-				}
+	// 			if (style.isEmpty()) {
+	// 				sb.append(Formatting.RESET);
+	// 			}
 
-				sb.append(asString);
-				return Optional.empty();
-			},
-			Style.EMPTY
-		);
+	// 			sb.append(asString);
+	// 			return Optional.empty();
+	// 		},
+	// 		Style.EMPTY
+	// 	);
 
-		var formattedName = sb.toString();
-		this.nameField.setText(formattedName);
-	}
+	// 	var formattedName = sb.toString();
+	// 	this.nameField.setText(formattedName);
+	// }
 
 	//	@ModifyArg(method = "onRenamed", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayNetworkHandler;sendPacket(Lnet/minecraft/network/Packet;)V"))
 	//	private Packet onRenamed_sendPacket(Packet packet) {
