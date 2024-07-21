@@ -1,0 +1,13 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "io.chaws.textutilities.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"mixins": [
+		"FormattingMixin",
+		"SharedConstantsMixin"
+	]
+}

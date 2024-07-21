@@ -1,10 +1,27 @@
 pluginManagement {
     repositories {
+        mavenCentral()
+        gradlePluginPortal()
         maven {
             name = 'Fabric'
             url = 'https://maven.fabricmc.net/'
         }
-        mavenCentral()
-        gradlePluginPortal()
     }
 }
+
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
+}
+
+include "modules:fabric-1.20.4"
+include "modules:fabric-1.21.0"
+
+// This should match the folder name of the project, or else IDEA may complain (see https://youtrack.jetbrains.com/issue/IDEA-317606)
+rootProject.name = 'Text Utilities'
+// rootProject.allprojects {
+//     buildCache {
+//         local {
+//             directory = file("${project.projectDir}/.gradle/build-cache")
+//         }
+//     }
+// }

@@ -1,5 +1,19 @@
 # Contributing
 
+## Developer Machine Setup
+
+### Windows
+
+Install JDK v17 (for MC 1.20) and v21 (for MC 1.21)
+```shell
+winget install --id EclipseAdoptium.Temurin.17.JDK
+winget install --id EclipseAdoptium.Temurin.21.JDK
+
+# Or Microsoft's build of OpenJDK with Hotspot
+winget install --id Microsoft.OpenJDK.17
+winget install --id Microsoft.OpenJDK.21
+```
+
 ## Adding a feature
 1. Assign yourself to an issue
 2. Create a branch based on:
