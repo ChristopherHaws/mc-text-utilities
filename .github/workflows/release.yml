@@ -79,6 +79,13 @@ jobs:
           distribution: temurin
           cache: gradle
 
+      - name: setup jdk 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: 21
+          distribution: temurin
+          cache: gradle
+
       - name: make gradle wrapper executable
         if: ${{ runner.os != 'Windows' }}
         run: chmod +x ./gradlew
@@ -88,11 +95,17 @@ jobs:
         env:
           MOD_VERSION: ${{ steps.version.outputs.release }}
 
-      - name: capture build artifacts
-        uses: actions/upload-artifact@v4
+      - name: capture 1.20.4 build artifacts
+        uses: actions/upload-artifact@v3
         with:
-          name: artifacts
-          path: build/libs/
+          name: artifacts-1.20.4
+          path: modules/fabric-1.20.4/build/libs/
+
+      - name: capture 1.21.0 build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts-1.21.0
+          path: modules/fabric-1.21.0/build/libs/
 
       - uses: Kir-Antipov/mc-publish@v3.3
         with:
@@ -103,7 +116,7 @@ jobs:
           loaders: |
             fabric
           game-versions: |
-            >=1.20.4
+            >=1.20.4 <1.21
           java: |
             17
 
@@ -112,8 +125,47 @@ jobs:
           github-prerelease: false
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-          files-primary: build/libs/!(*-@(dev|sources|javadoc)).jar
-          files-secondary: build/libs/*-@(dev|sources|javadoc).jar
+          files: |
+            modules/fabric-1.20.4/build/libs/!(*-@(dev|sources|javadoc)).jar
+            modules/fabric-1.20.4/build/libs/*-@(dev|sources|javadoc).jar
+          # files-primary: build/libs/!(*-@(dev|sources|javadoc)).jar
+          # files-secondary: build/libs/*-@(dev|sources|javadoc).jar
+
+          #modrinth-id: Read from fabric.mod.json custom.modmanager.modrinth
+          modrinth-featured: true
+          modrinth-unfeature-mode: subset
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+
+          #curseforge-id: Read from fabric.mod.json custom.modmanager.curseforge
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+
+          retry-attempts: 2
+          retry-delay: 10000
+          fail-mode: fail
+
+      - uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          name: v${{ steps.version.outputs.release }} for ${{ steps.version.outputs.build }}
+          version: ${{ steps.version.outputs.release }}+${{ steps.version.outputs.build }}
+          version-type: release
+
+          loaders: |
+            fabric
+          game-versions: |
+            >=1.21
+          java: |
+            21
+
+          github-generate-changelog: true
+          github-draft: false
+          github-prerelease: false
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+          files: |
+            modules/fabric-1.21.0/build/libs/!(*-@(dev|sources|javadoc)).jar
+            modules/fabric-1.21.0/build/libs/*-@(dev|sources|javadoc).jar
+          # files-primary: build/libs/!(*-@(dev|sources|javadoc)).jar
+          # files-secondary: build/libs/*-@(dev|sources|javadoc).jar
 
           #modrinth-id: Read from fabric.mod.json custom.modmanager.modrinth
           modrinth-featured: true

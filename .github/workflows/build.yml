@@ -3,30 +3,25 @@ on:
   workflow_dispatch:
   pull_request:
     paths-ignore:
-      - '**/*.md'
-      - '**/*.pdn'
-      - '.github/FUNDING.yml'
+      - "**/*.md"
+      - "**/*.pdn"
+      - ".github/FUNDING.yml"
   push:
     branches:
-      - 'main'
-      - 'mc/**'
+      - "main"
+      - "mc/**"
     paths-ignore:
-      - '**/*.md'
-      - '**/*.pdn'
-      - '.github/FUNDING.yml'
+      - "**/*.md"
+      - "**/*.pdn"
+      - ".github/FUNDING.yml"
 
 env:
   APPEND_BUILD_NUMBER: true
 
 jobs:
   build:
-    strategy:
-      matrix:
-        # Current Java LTS & minimum supported by Minecraft
-        java: [17]
-        os: [ubuntu-20.04]
-    runs-on: ${{ matrix.os }}
-
+    name: release
+    runs-on: ubuntu-latest
     steps:
       - name: checkout repository
         uses: actions/checkout@v3
@@ -34,10 +29,17 @@ jobs:
       - name: validate gradle wrapper
         uses: gradle/wrapper-validation-action@v1
 
-      - name: setup jdk ${{ matrix.java }}
+      - name: setup jdk 17
         uses: actions/setup-java@v3
         with:
-          java-version: ${{ matrix.java }}
+          java-version: 17
+          distribution: temurin
+          cache: gradle
+
+      - name: setup jdk 21
+        uses: actions/setup-java@v3
+        with:
+          java-version: 21
           distribution: temurin
           cache: gradle
 
@@ -48,8 +50,14 @@ jobs:
       - name: build
         run: ./gradlew build --no-daemon
 
-      - name: capture build artifacts
+      - name: capture 1.20.4 build artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: artifacts-${{ runner.os }}
-          path: build/libs/
+          name: artifacts-1.20.4
+          path: modules/fabric-1.20.4/build/libs/
+
+      - name: capture 1.21.0 build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts-1.21.0
+          path: modules/fabric-1.21.0/build/libs/
