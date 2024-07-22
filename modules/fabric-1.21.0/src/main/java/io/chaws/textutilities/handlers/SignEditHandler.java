@@ -2,7 +2,6 @@ package io.chaws.textutilities.handlers;
 
 import io.chaws.textutilities.TextUtilities;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
-import net.minecraft.block.entity.HangingSignBlockEntity;
 import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
