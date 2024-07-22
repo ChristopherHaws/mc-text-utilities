@@ -2,6 +2,7 @@ package io.chaws.textutilities.handlers;
 
 import io.chaws.textutilities.TextUtilities;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.minecraft.block.entity.HangingSignBlockEntity;
 import net.minecraft.block.entity.SignBlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.text.Text;
@@ -65,8 +66,9 @@ public class SignEditHandler {
 			return ActionResult.FAIL;
 		}
 
+		// Set the editor to the player to allow them to edit the sign
 		signBlock.setEditor(playerId);
-		player.openEditSignScreen(signBlock, true);
+		player.openEditSignScreen(signBlock, signBlock.isPlayerFacingFront(player));
 		return ActionResult.SUCCESS;
 	}
 }
