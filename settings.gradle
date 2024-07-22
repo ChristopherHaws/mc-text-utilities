@@ -14,6 +14,9 @@ plugins {
 }
 
 // https://docs.gradle.org/current/userguide/multi_project_builds.html#modifying_a_subproject_path
+include "fabric-1.20.1"
+project(':fabric-1.20.1').projectDir = file("modules/fabric-1.20.1")
+
 include "fabric-1.20.4"
 project(':fabric-1.20.4').projectDir = file("modules/fabric-1.20.4")
 

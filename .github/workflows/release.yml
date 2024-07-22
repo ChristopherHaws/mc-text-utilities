@@ -12,9 +12,15 @@ env:
   #PUBLISH: ${{ !contains(github.event.head_commit.message, '[ci skip]') && !contains(github.event.pull_request.title, '[ci skip]') }}
 
 jobs:
-  build:
+  release:
     name: release
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        minecraft_version: [1.20.1, 1.20.4, 1.21.0]
+    env:
+      project_name: fabric-${{ matrix.minecraft_version }}
+      artifact_dir: modules/fabric-${{ matrix.minecraft_version }}/build/libs
     steps:
       - name: checkout repository
         uses: actions/checkout@v2
@@ -91,34 +97,27 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: build
-        run: ./gradlew build
+        run: ./gradlew :${{ env.project_name }}:build --no-daemon
         env:
           MOD_VERSION: ${{ steps.version.outputs.release }}
 
-      - name: capture 1.20.4 build artifacts
+      - name: capture build artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: artifacts-1.20.4
-          path: modules/fabric-1.20.4/build/libs/
-
-      - name: capture 1.21.0 build artifacts
-        uses: actions/upload-artifact@v3
-        with:
-          name: artifacts-1.21.0
-          path: modules/fabric-1.21.0/build/libs/
+          name: artifacts-${{ matrix.minecraft_version }}
+          path: ${{ env.artifact_dir }}
 
       - uses: Kir-Antipov/mc-publish@v3.3
         with:
-          name: v${{ steps.version.outputs.release }} for ${{ steps.version.outputs.build }}
-          version: ${{ steps.version.outputs.release }}+${{ steps.version.outputs.build }}
+          name: v${{ steps.version.outputs.release }} for ${{ matrix.minecraft_version }}
+          version: ${{ steps.version.outputs.release }}+${{ matrix.minecraft_version }}
           version-type: release
 
-          loaders: |
-            fabric
-          game-versions: |
-            >=1.20.4 <1.21
-          java: |
-            17
+          # This metadata is read from the mod's fabric.mod.json file
+          # https://github.com/Kir-Antipov/mc-publish/blob/v3.3/src/loaders/fabric/fabric-metadata-reader.ts
+          # loaders:
+          # game-versions:
+          # java:
 
           github-generate-changelog: true
           github-draft: false
@@ -126,44 +125,8 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
           files: |
-            modules/fabric-1.20.4/build/libs/!(*-@(dev|sources|javadoc)).jar
-            modules/fabric-1.20.4/build/libs/*-@(dev|sources|javadoc).jar
-          # files-primary: build/libs/!(*-@(dev|sources|javadoc)).jar
-          # files-secondary: build/libs/*-@(dev|sources|javadoc).jar
-
-          #modrinth-id: Read from fabric.mod.json custom.modmanager.modrinth
-          modrinth-featured: true
-          modrinth-unfeature-mode: subset
-          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-
-          #curseforge-id: Read from fabric.mod.json custom.modmanager.curseforge
-          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-
-          retry-attempts: 2
-          retry-delay: 10000
-          fail-mode: fail
-
-      - uses: Kir-Antipov/mc-publish@v3.3
-        with:
-          name: v${{ steps.version.outputs.release }} for ${{ steps.version.outputs.build }}
-          version: ${{ steps.version.outputs.release }}+${{ steps.version.outputs.build }}
-          version-type: release
-
-          loaders: |
-            fabric
-          game-versions: |
-            >=1.21
-          java: |
-            21
-
-          github-generate-changelog: true
-          github-draft: false
-          github-prerelease: false
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
-          files: |
-            modules/fabric-1.21.0/build/libs/!(*-@(dev|sources|javadoc)).jar
-            modules/fabric-1.21.0/build/libs/*-@(dev|sources|javadoc).jar
+            ${{ env.artifact_dir }}/!(*-@(dev|sources|javadoc)).jar
+            ${{ env.artifact_dir }}/*-@(dev|sources|javadoc).jar
           # files-primary: build/libs/!(*-@(dev|sources|javadoc)).jar
           # files-secondary: build/libs/*-@(dev|sources|javadoc).jar
 

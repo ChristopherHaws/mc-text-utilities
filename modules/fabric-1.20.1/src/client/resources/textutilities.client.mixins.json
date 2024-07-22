@@ -1,0 +1,15 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "io.chaws.textutilities.client.mixin",
+	"compatibilityLevel": "JAVA_17",
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"client": [
+		"AnvilScreenMixin",
+		"ChatHudMixin",
+		"SignEditScreenMixin",
+		"TextFieldWidgetMixin"
+	]
+}
