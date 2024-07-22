@@ -1,6 +1,5 @@
 plugins {
-	// https://fabricmc.net/wiki/documentation:fabric_loom
-	id 'fabric-loom' version '1.7-SNAPSHOT'
+	id 'fabric-loom'
 	id 'maven-publish'
 	id 'idea'
 }
@@ -9,51 +8,12 @@ String buildNumber = System.getenv("GITHUB_RUN_NUMBER")
 Boolean appendBuildNumber = System.getenv("APPEND_BUILD_NUMBER") == "true" && buildNumber != null
 String modVersion = System.getenv("MOD_VERSION") ?: "0.0.1"
 
-group = project.maven_group
 version = modVersion +
         (appendBuildNumber ? "-build${buildNumber}" : "") +
         "+${project.minecraft_version}"
 
 base {
-	archivesName = "${project.archives_base_name}-fabric"
-}
-
-repositories {
-    mavenCentral()
-	maven { url = "https://maven.shedaniel.me/" }
-	maven { url = "https://maven.terraformersmc.com/releases/" }
-    maven { url = "https://maven.fabricmc.net/" }
-	// Needed by modmenu
-	// https://placeholders.pb4.eu/dev/getting-started/#__tabbed_1_1
-	maven {
-        url "https://maven.nucleoid.xyz/"
-        name "Nucleoid"
-    }
-
-	exclusiveContent {
-		forRepository {
-			maven {
-				name = "CurseForge"
-				url = "https://cursemaven.com"
-			}
-		}
-		filter {
-			includeGroup "curse.maven"
-		}
-	}
-
-    // https://docs.modrinth.com/docs/tutorials/maven/#advanced-repository-declaration-recommended
-    exclusiveContent {
-        forRepository {
-            maven {
-                name = "Modrinth"
-                url = "https://api.modrinth.com/maven"
-            }
-        }
-        filter {
-            includeGroup "maven.modrinth"
-        }
-    }
+	archivesName = "${project.mod_slug}-fabric"
 }
 
 loom {
@@ -133,6 +93,8 @@ processResources {
     properties.put("version", project.version)
     properties.put("mod_id", project.mod_id)
     properties.put("mod_name", project.mod_name)
+    properties.put("mod_slug", project.mod_slug)
+    properties.put("mod_author", project.mod_author)
     properties.put("loader_version", project.loader_version)
     properties.put("fabric_version", project.fabric_version)
     properties.put("minecraft_version", project.minecraft_version)
@@ -146,12 +108,6 @@ processResources {
 }
 
 tasks.withType(JavaCompile).configureEach {
-    // ensure that the encoding is set to UTF-8, no matter what the system default is
-    // this fixes some edge cases with special characters not displaying correctly
-    // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-    // If Javadoc is generated, this must be specified in that task too.
-    it.options.encoding = "UTF-8"
-
 	// Minecraft 1.21 upwards uses Java 21.
 	it.options.release = 21
 }
@@ -161,11 +117,6 @@ java {
 	// if it is present.
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
-
-	toolchain {
-		languageVersion = JavaLanguageVersion.of(21)
-	}
-
 	sourceCompatibility = JavaVersion.VERSION_21
 	targetCompatibility = JavaVersion.VERSION_21
 }
@@ -180,24 +131,5 @@ test {
 	useJUnitPlatform()
 	testLogging {
 		events "passed", "skipped", "failed"
-	}
-}
-
-// configure the maven publication
-publishing {
-	publications {
-		//noinspection GroovyAssignabilityCheck
-        mavenJava(MavenPublication) {
-			//noinspection GroovyAssignabilityCheck
-            from components.java
-		}
-	}
-
-	// See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
-	repositories {
-		// Add repositories to publish to here.
-		// Notice: This block does NOT have the same function as the block in the top level.
-		// The repositories here will be used for publishing your artifact, not for
-		// retrieving dependencies.
 	}
 }
