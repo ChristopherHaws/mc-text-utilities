@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        minecraft_version: [1.20.1, 1.20.4, 1.21.0]
+        minecraft_version: [1.20.1, 1.20.4, 1.21.0, 1.21.2]
     env:
       project_name: fabric-${{ matrix.minecraft_version }}
       artifact_dir: modules/fabric-${{ matrix.minecraft_version }}/build/libs
@@ -102,7 +102,7 @@ jobs:
           MOD_VERSION: ${{ steps.version.outputs.release }}
 
       - name: capture build artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: artifacts-${{ matrix.minecraft_version }}
           path: ${{ env.artifact_dir }}
