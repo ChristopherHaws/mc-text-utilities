@@ -23,6 +23,9 @@ project(':fabric-1.20.4').projectDir = file("modules/fabric-1.20.4")
 include "fabric-1.21.0"
 project(':fabric-1.21.0').projectDir = file("modules/fabric-1.21.0")
 
+include "fabric-1.21.2"
+project(':fabric-1.21.2').projectDir = file("modules/fabric-1.21.2")
+
 // This should match the folder name of the project, or else IDEA may complain (see https://youtrack.jetbrains.com/issue/IDEA-317606)
 // https://docs.gradle.org/current/userguide/multi_project_builds.html#sec:naming_recommendations
 rootProject.name = 'text-utilities'
