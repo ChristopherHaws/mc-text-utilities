@@ -84,8 +84,10 @@ dependencies {
     modLocalRuntime("maven.modrinth:sodium:${project.sodium_version}")
     // modLocalRuntime("maven.modrinth:starlight:${project.starlight_version}")
 	modLocalRuntime("maven.modrinth:architectury-api:${project.architectury_api_version}")
-    modLocalRuntime("maven.modrinth:auth-me:${project.auth_me_version}")
-    modLocalRuntime("maven.modrinth:expanded-storage:${project.expanded_storage_version}")
+    // modLocalRuntime("maven.modrinth:auth-me:${project.auth_me_version}")
+    // modLocalRuntime("maven.modrinth:expanded-storage:${project.expanded_storage_version}")
+    // modLocalRuntime("maven.modrinth:fabric-language-kotlin:${project.fabric_language_kotlin_version}")
+    // modLocalRuntime("maven.modrinth:resourceful-config:${project.resourceful_config_version}")
 }
 
 processResources {
